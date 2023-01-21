@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:marketify/controllers/auth_controller.dart';
+import 'package:marketify/routes/route_helper.dart';
 import 'package:marketify/utils/colors.dart';
 import 'package:marketify/utils/dimensions.dart';
 import 'package:marketify/widgets/app_icon.dart';
 import 'package:marketify/widgets/big_text.dart';
 
+import '../../controllers/cart_controller.dart';
 import '../../widgets/account_widget.dart';
 
 class AccountPage extends StatelessWidget {
@@ -101,16 +105,31 @@ class AccountPage extends StatelessWidget {
                           bigText: BigText(text: "Messages")),
                       SizedBox(height: Dimensions.height20,),
 
-                      // MESSAGE
-                      AccountWidget(
-                          appIcon: AppIcon(
-                            icon: Icons.message_outlined,
-                            backgroundColor: Colors.redAccent,
-                            iconColor: Colors.white,
-                            iconSize:Dimensions.height10*5/2 ,
-                            size: Dimensions.height10*5,),
-                          bigText: BigText(text: "Messages")),
+                      // SIGN OUT START
+                      GestureDetector(
+                        onTap: (){
+                          // clear all information while signed out
+                          if(Get.find<AuthController>().userLoggedIn()) {
+                            Get.find<AuthController>().clearSharedData();
+                            Get.find<CartController>().clear();
+                            Get.find<CartController>().clearCartHistory();
+                            Get.offNamed(RouteHelper.getSignInPage());
+                          }
+                          else {
+                            "you log out";
+                          }
+                        },
+                        child: AccountWidget(
+                            appIcon: AppIcon(
+                              icon: Icons.logout,
+                              backgroundColor: Colors.redAccent,
+                              iconColor: Colors.white,
+                              iconSize:Dimensions.height10*5/2 ,
+                              size: Dimensions.height10*5,),
+                            bigText: BigText(text: "Sign Out")),
+                      ),
                       SizedBox(height: Dimensions.height20,),
+                      // SIGN OUT END
                     ],
                   ),
                 ),

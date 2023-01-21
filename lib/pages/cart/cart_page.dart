@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketify/controllers/auth_controller.dart';
 import 'package:marketify/controllers/popular_product_controller.dart';
 import 'package:marketify/controllers/recommended_product_controller.dart';
 import 'package:marketify/utils/app_constants.dart';
@@ -247,8 +248,14 @@ class CartPage extends StatelessWidget {
                 onTap: () {
                   // popularProduct.addItem(product);
 
-                  print("tapped");
-                  cartController.addToHistory();
+                  if(Get.find<AuthController>().userLoggedIn()) {
+                    print("tapped");
+                    cartController.addToHistory();
+                  }
+                  else {
+                    Get.toNamed(RouteHelper.getSignInPage());
+                  }
+
                 },
                 child: Container(
                   padding: EdgeInsets.only(

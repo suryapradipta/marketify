@@ -88,4 +88,13 @@ class CartRepo {
     cart=[];
     sharedPreferences.remove(AppConstants.CART_LIST);
   }
+
+  // clear the cart history while user sign out
+  void clearCartHistory() {
+    removeCart();
+    cartHistory=[];
+    sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
+
+
+  }
 }

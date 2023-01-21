@@ -140,7 +140,7 @@ class SignUpPage extends StatelessWidget {
                   width: Dimensions.screenWidth/2,
                   height: Dimensions.screenHeight/13,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius15),
+                      borderRadius: BorderRadius.circular(Dimensions.radius30),
                       color: AppColors.mainColor
                   ),
                   child: Center(
