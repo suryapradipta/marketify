@@ -4,6 +4,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../utils/colors.dart';
 import '../account/account_page.dart';
+import '../auth/sign_in_page.dart';
 import '../auth/sign_up_page.dart';
 import '../cart/cart_history.dart';
 import 'main_food_page.dart';
@@ -52,7 +53,8 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       MainFoodPage(),
-      SignUpPage(),
+      // SignInPage(),
+      Container(child: Center(child: Text("Next next next next page"))),
       CartHistory(),
       AccountPage(),
       Container(child: Center(child: Text("Next next next next page"))),
@@ -153,8 +155,10 @@ class _HomePageState extends State<HomePage> {
 
       // HOME BAR EDITING SECTION
       bottomNavigationBar: BottomNavigationBar(
+
         // supaya icon yangd dipilih keliatan sesuai warna
         selectedItemColor: AppColors.mainColor,
+
         // supaya icon yang tidak dipencet keliatan sesuai warna
         unselectedItemColor: Colors.amberAccent,
 

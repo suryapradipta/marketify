@@ -33,17 +33,16 @@ class MyApp extends StatelessWidget {
     // Get builder harus dipanggil sebelum GetMaterialApp
     return GetBuilder<PopularProductController>(builder: (_){
       return GetBuilder<RecommendedProductController>(builder: (_){
-        return  GetMaterialApp(
+        return GetMaterialApp(
           // remove debug label on the top right
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
 
           // home: SignInPage(),
           // home: SplashScreen(),
-
-
           initialRoute: RouteHelper.getSplashPage(),
           getPages: RouteHelper.routes,
+
         );
       });
     });

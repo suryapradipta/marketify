@@ -113,7 +113,7 @@ class SignUpPage extends StatelessWidget {
               AppTextField(
                   textController: passwordController,
                   hintText: "Password",
-                  icon: Icons.password_sharp),
+                  icon: Icons.password_sharp, isObscure: true,),
               SizedBox(height: Dimensions.height20,),
 
               // NAME
@@ -140,7 +140,7 @@ class SignUpPage extends StatelessWidget {
                   width: Dimensions.screenWidth/2,
                   height: Dimensions.screenHeight/13,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius30),
+                      borderRadius: BorderRadius.circular(Dimensions.radius15),
                       color: AppColors.mainColor
                   ),
                   child: Center(
