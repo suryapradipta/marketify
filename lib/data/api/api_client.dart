@@ -29,6 +29,9 @@ class ApiClient extends GetConnect implements GetxService {
     // when talked to server, we have to call _mainHeaders
     // when want to get responses from the server, we tell the server look this is the get request i want you send me the json data
     // the data is from coming from client
+    
+    // the token always founded once user register
+    // for new devices token is empty
     token = sharedPreferences.getString(AppConstants.TOKEN)??"";
     _mainHeaders = {
       // request json data to server

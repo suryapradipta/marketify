@@ -3,6 +3,7 @@ import 'package:marketify/pages/food/popular_food_detail.dart';
 import 'package:marketify/pages/food/recommended_food_detail.dart';
 import 'package:get/get.dart';
 
+import '../pages/address/add_address_page.dart';
 import '../pages/cart/cart_page.dart';
 import '../pages/home/home_page.dart';
 import '../pages/home/main_food_page.dart';
@@ -15,6 +16,7 @@ class RouteHelper {
   static const String recommendedFood = "/recommended-food";
   static const String cartPage = "/cart-page";
   static const String signIn = "/sign-in";
+  static const String addAddress = "/add-address";
 
   static String getSplashPage() => '$splashPage';
 
@@ -32,6 +34,8 @@ class RouteHelper {
   static String getCartPage() => '$cartPage';
 
   static String getSignInPage() => '$signIn';
+
+  static String getAddressPage() => '$addAddress';
 
   static List<GetPage> routes = [
     GetPage(name: splashPage, page: () => SplashScreen()),
@@ -66,5 +70,10 @@ class RouteHelper {
           return CartPage();
         },
         transition: Transition.fadeIn),
+    
+    GetPage(name: addAddress, page: (){
+      return AddAddressPage();
+    }),
+
   ];
 }
