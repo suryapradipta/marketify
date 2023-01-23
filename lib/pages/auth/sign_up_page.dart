@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:marketify/base/show_custom_snakbar.dart';
 import 'package:marketify/models/signup_body_model.dart';
-import 'package:marketify/routes/route_helper.dart';
 import 'package:marketify/utils/dimensions.dart';
 import 'package:marketify/widgets/big_text.dart';
 import 'package:get/get.dart';
@@ -64,7 +63,6 @@ class SignUpPage extends StatelessWidget {
         authController.registration(signUpBody).then((status) {
           if(status.isSuccess) {
             print("Success registration");
-            Get.offNamed(RouteHelper.getInitial()); 
           }
           else {
             showCustomSnackBar(status.message);
