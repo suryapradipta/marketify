@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -14,17 +16,20 @@ class LocationController extends GetxController implements GetxService {
   bool _loading = false;
   late Position _position;
   late Position _pickPosition;
+
   Placemark _placemark = Placemark();
   Placemark _pickPlacemark = Placemark();
+
+  Placemark get placemark => _placemark;
+  Placemark get pickPlacemark => _pickPlacemark;
+
   List<AddressModel> _addressList = [];
 
   List<AddressModel> get addressList => _addressList;
   late List<AddressModel> _allAddressList;
   List<String> _addressTypeList = ["home", "office", "others"];
   int _addressTypeIndex = 0;
-  late Map<String, dynamic> _getAddress;
 
-  Map get getAddress => _getAddress;
 
   late GoogleMapController _mapController;
   bool _updateAddressData = true;
@@ -42,7 +47,6 @@ class LocationController extends GetxController implements GetxService {
   void updatePosition(CameraPosition position, bool fromAddress) async{
     if(_updateAddressData) {
       _loading = true;
-      // update the ui
       update();
       try {
         if(fromAddress) {
@@ -76,6 +80,8 @@ class LocationController extends GetxController implements GetxService {
               position.target.latitude,
             )
           );
+          fromAddress?_placemark = Placemark(name:_address):
+          _pickPlacemark=Placemark(name: _address);
         }
       }catch(e) {
         print(e);
@@ -94,5 +100,22 @@ class LocationController extends GetxController implements GetxService {
     }
 
     return _address;
+  }
+
+
+  late Map<String, dynamic> _getAddress;
+  Map get getAddress => _getAddress;
+
+  AddressModel getUserAddress() {
+    late AddressModel _addressModel;
+    // convert to map using jsonDecode
+    _getAddress = jsonDecode(locationRepo.getUserAddress());
+
+    try {
+      _addressModel = AddressModel.fromJson(jsonDecode(locationRepo.getUserAddress()));
+    } catch(e) {
+      print(e);
+    }
+    return _addressModel;
   }
 }
