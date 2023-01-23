@@ -57,7 +57,10 @@ class _MainFoodPageState extends State<MainFoodPage> {
                   child: Container( //\\ Header - search button on the top right
                     width: Dimensions.height45,
                     height: Dimensions.height45,
-                    child: Icon(Icons.search, color: Colors.white, size: Dimensions.iconSize24,),
+                    child: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: Dimensions.iconSize24,),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius15),
                       color: AppColors.mainColor,
