@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/app_constants.dart';
 
@@ -14,13 +13,12 @@ class ApiClient extends GetConnect implements GetxService {
 
   // URL of our app that would talk to the server
   final String appBaseUrl;
-  late SharedPreferences sharedPreferences;
 
   // Map for strong data locally or converting data to map
   late Map<String, String> _mainHeaders;
 
 
-  ApiClient({required this.appBaseUrl, required this.sharedPreferences}) {
+  ApiClient({required this.appBaseUrl}) {
     baseUrl = appBaseUrl;
 
     // each time when request, try to get data from server is 30s
@@ -29,7 +27,7 @@ class ApiClient extends GetConnect implements GetxService {
     // when talked to server, we have to call _mainHeaders
     // when want to get responses from the server, we tell the server look this is the get request i want you send me the json data
     // the data is from coming from client
-    token = sharedPreferences.getString(AppConstants.TOKEN)!;
+    token = AppConstants.TOKEN;
     _mainHeaders = {
       // request json data to server
       'Content-type' : 'application/json; charset=UTF-8',
@@ -47,11 +45,9 @@ class ApiClient extends GetConnect implements GetxService {
   }
 
   // request for getting data from server
-  Future<Response> getData(String uri, {Map<String, String>? headers}) async {
+  Future<Response> getData(String uri,) async {
     try {
-      Response response = await get(uri,
-      headers:headers??_mainHeaders
-      );
+      Response response = await get(uri);
       return response;
     }catch(e){
       return Response(statusCode: 1, statusText: e.toString());

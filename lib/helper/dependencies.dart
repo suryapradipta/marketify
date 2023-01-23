@@ -7,13 +7,11 @@ import '../controllers/auth_controller.dart';
 import '../controllers/cart_controller.dart';
 import '../controllers/popular_product_controller.dart';
 import '../controllers/recommended_product_controller.dart';
-import '../controllers/user_controller.dart';
 import '../data/api/api_client.dart';
 import '../data/repository/auth_repo.dart';
 import '../data/repository/cart_repo.dart';
 import '../data/repository/popular_product_repo.dart';
 import '../data/repository/recommended_product_repo.dart';
-import '../data/repository/user_repo.dart';
 import '../utils/app_constants.dart';
 
 Future<void> init() async {
@@ -26,9 +24,8 @@ Future<void> init() async {
   Get.lazyPut(() => sharedPreferences);
 
   // api client
-  Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.BASE_URL, sharedPreferences:Get.find()));
+  Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.BASE_URL));
   Get.lazyPut(() => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
-  Get.lazyPut(() => UserRepo(apiClient: Get.find()));
 
 
 
@@ -41,8 +38,6 @@ Future<void> init() async {
   // controllers
   // all controllers must be loaded in dependencies
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
-  Get.lazyPut(() => UserController(userRepo: Get.find()));
-
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
   Get.lazyPut(() => RecommendedProductController(recommendedProductRepo: Get.find()));
   Get.lazyPut(() => CartController(cartRepo: Get.find()));

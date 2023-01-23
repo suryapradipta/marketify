@@ -32,13 +32,12 @@ class CartPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // AppIcon(
-                  //   icon: Icons.arrow_back_ios,
-                  //   iconColor: Colors.white,
-                  //   backgroundColor: AppColors.mainColor,
-                  //   size: Dimensions.iconSize24,
-                  // ),
-
+                  AppIcon(
+                    icon: Icons.arrow_back_ios,
+                    iconColor: Colors.white,
+                    backgroundColor: AppColors.mainColor,
+                    size: Dimensions.iconSize24,
+                  ),
                   // supaya home icon lebih ke kanan
                   SizedBox(width: Dimensions.width20*5,),
                   GestureDetector(
@@ -46,26 +45,20 @@ class CartPage extends StatelessWidget {
                       Get.toNamed(RouteHelper.getInitial());
 
                     },
-                    child: Container( //\\ Header - search button on the top right
-                      width: Dimensions.height45,
-                      height: Dimensions.height45,
-                      child: Icon(
-                        Icons.home_outlined,
-                        color: Colors.white,
-                        size: Dimensions.iconSize24,),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.radius30),
-                        color: AppColors.mainColor,
-                      ),
+                    child: AppIcon(
+                      icon: Icons.home_outlined,
+                      iconColor: Colors.white,
+                      backgroundColor: AppColors.mainColor,
+                      size: Dimensions.iconSize24,
                     ),
                   ),
 
-                  // AppIcon(
-                  //   icon: Icons.shopping_cart,
-                  //   iconColor: Colors.white,
-                  //   backgroundColor: AppColors.mainColor,
-                  //   size: Dimensions.iconSize24,
-                  // ),
+                  AppIcon(
+                    icon: Icons.shopping_cart,
+                    iconColor: Colors.white,
+                    backgroundColor: AppColors.mainColor,
+                    size: Dimensions.iconSize24,
+                  ),
                 ],
               )),
 
