@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 
 import '../../base/no_data_page.dart';
 import '../../controllers/cart_controller.dart';
+import '../../controllers/location_controller.dart';
 import '../../routes/route_helper.dart';
 
 class CartPage extends StatelessWidget {
@@ -254,10 +255,14 @@ class CartPage extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   // popularProduct.addItem(product);
+                  // cartController.addToHistory();
 
                   if(Get.find<AuthController>().userLoggedIn()) {
-                    print("tapped");
-                    cartController.addToHistory();
+                    // print("tapped");
+                    print("logged in?");
+                    if(Get.find<LocationController>().addressList.isEmpty) {
+                      Get.toNamed(RouteHelper.getAddressPage());
+                    }
                   }
                   else {
                     Get.toNamed(RouteHelper.getSignInPage());
