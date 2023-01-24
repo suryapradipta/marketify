@@ -55,7 +55,7 @@ class CartPage extends StatelessWidget {
                         color: Colors.white,
                         size: Dimensions.iconSize24,),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.radius30),
+                        borderRadius: BorderRadius.circular(Dimensions.radius15),
                         color: AppColors.mainColor,
                       ),
                     ),
@@ -255,6 +255,9 @@ class CartPage extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   // popularProduct.addItem(product);
+
+
+                  // ADD TO THE ORDER TO HISTORY WHILE CHECKOUT
                   // cartController.addToHistory();
 
                   if(Get.find<AuthController>().userLoggedIn()) {
@@ -262,6 +265,9 @@ class CartPage extends StatelessWidget {
                     print("logged in?");
                     if(Get.find<LocationController>().addressList.isEmpty) {
                       Get.toNamed(RouteHelper.getAddressPage());
+                    }
+                    else {
+                      Get.offNamed(RouteHelper.getInitial());
                     }
                   }
                   else {
