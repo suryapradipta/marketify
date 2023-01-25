@@ -42,9 +42,9 @@ class LocationController extends GetxController implements GetxService {
 
   int get addressTypeIndex => _addressTypeIndex;
 
-  late GoogleMapController _mapController;
+  GoogleMapController? _mapController;
 
-  GoogleMapController get mapController => _mapController;
+  GoogleMapController? get mapController => _mapController;
 
   bool _updateAddressData = true;
   bool _changeAddress = true;
