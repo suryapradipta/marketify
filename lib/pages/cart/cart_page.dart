@@ -39,6 +39,24 @@ class CartPage extends StatelessWidget {
                   //   backgroundColor: AppColors.mainColor,
                   //   size: Dimensions.iconSize24,
                   // ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+
+                    child: Container(
+                      width: Dimensions.height45,
+                      height: Dimensions.height45,
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: Dimensions.iconSize24,),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.radius30),
+                        color: AppColors.mainColor,
+                      ),
+                    ),
+                  ),
 
                   // supaya home icon lebih ke kanan
                   SizedBox(width: Dimensions.width20*5,),
@@ -47,7 +65,7 @@ class CartPage extends StatelessWidget {
                       Get.toNamed(RouteHelper.getInitial());
 
                     },
-                    child: Container( //\\ Header - search button on the top right
+                    child: Container(
                       width: Dimensions.height45,
                       height: Dimensions.height45,
                       child: Icon(
@@ -55,7 +73,7 @@ class CartPage extends StatelessWidget {
                         color: Colors.white,
                         size: Dimensions.iconSize24,),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.radius15),
+                        borderRadius: BorderRadius.circular(Dimensions.radius30),
                         color: AppColors.mainColor,
                       ),
                     ),
