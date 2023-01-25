@@ -19,44 +19,52 @@ class LocationController extends GetxController implements GetxService {
   late Position _pickPosition;
 
   Placemark _placemark = Placemark();
-  Placemark _pickPlacemark = Placemark();
 
   Placemark get placemark => _placemark;
+
+  Placemark _pickPlacemark = Placemark();
+
   Placemark get pickPlacemark => _pickPlacemark;
 
   List<AddressModel> _addressList = [];
+
   List<AddressModel> get addressList => _addressList;
 
   late List<AddressModel> _allAddressList;
+
   List<AddressModel> get allAddressList => _allAddressList;
 
   final List<String> _addressTypeList = ["home", "office", "others"];
+
   List<String> get addressTypeList => _addressTypeList;
+
   int _addressTypeIndex = 0;
+
   int get addressTypeIndex => _addressTypeIndex;
 
-
   late GoogleMapController _mapController;
+
   GoogleMapController get mapController => _mapController;
 
   bool _updateAddressData = true;
   bool _changeAddress = true;
 
   bool get loading => _loading;
-  Position get position => _position;
-  Position get pickPosition => _pickPosition;
 
+  Position get position => _position;
+
+  Position get pickPosition => _pickPosition;
 
   void setMapController(GoogleMapController mapController) {
     _mapController = _mapController;
   }
 
-  void updatePosition(CameraPosition position, bool fromAddress) async{
-    if(_updateAddressData) {
+  void updatePosition(CameraPosition position, bool fromAddress) async {
+    if (_updateAddressData) {
       _loading = true;
       update();
       try {
-        if(fromAddress) {
+        if (fromAddress) {
           _position = Position(
               longitude: position.target.longitude,
               latitude: position.target.latitude,
@@ -65,8 +73,7 @@ class LocationController extends GetxController implements GetxService {
               altitude: 1,
               heading: 1,
               speed: 1,
-              speedAccuracy: 1
-          );
+              speedAccuracy: 1);
         } else {
           _pickPosition = Position(
               longitude: position.target.longitude,
@@ -76,30 +83,30 @@ class LocationController extends GetxController implements GetxService {
               altitude: 1,
               heading: 1,
               speed: 1,
-              speedAccuracy: 1
-          );
+              speedAccuracy: 1);
         }
 
-        if(_changeAddress) {
-          String _address = await getAddressfromGeocode(
-            LatLng(
-              position.target.longitude,
-              position.target.latitude,
-            )
-          );
-          fromAddress?_placemark = Placemark(name:_address):
-          _pickPlacemark=Placemark(name: _address);
+        if (_changeAddress) {
+          String _address = await getAddressfromGeocode(LatLng(
+            position.target.longitude,
+            position.target.latitude,
+          ));
+          fromAddress
+              ? _placemark = Placemark(name: _address)
+              : _pickPlacemark = Placemark(name: _address);
         }
-      }catch(e) {
+      } catch (e) {
         print(e);
       }
+      _loading = false;
+      update();
     }
   }
 
   Future<String> getAddressfromGeocode(LatLng latlng) async {
     String _address = "Unknown Location Found";
     Response response = await locationRepo.getAddressfromGeocode(latlng);
-    if(response.body["status"]=='OK') {
+    if (response.body["status"] == 'OK') {
       _address = response.body["results"][0]['formatted_address'].toString();
       print("printing address " + _address);
     } else {
@@ -109,8 +116,8 @@ class LocationController extends GetxController implements GetxService {
     return _address;
   }
 
-
   late Map<String, dynamic> _getAddress;
+
   Map get getAddress => _getAddress;
 
   AddressModel getUserAddress() {
@@ -119,8 +126,9 @@ class LocationController extends GetxController implements GetxService {
     _getAddress = jsonDecode(locationRepo.getUserAddress());
 
     try {
-      _addressModel = AddressModel.fromJson(jsonDecode(locationRepo.getUserAddress()));
-    } catch(e) {
+      _addressModel =
+          AddressModel.fromJson(jsonDecode(locationRepo.getUserAddress()));
+    } catch (e) {
       print(e);
     }
     return _addressModel;
@@ -136,12 +144,12 @@ class LocationController extends GetxController implements GetxService {
     update();
     Response response = await locationRepo.addAddress(addressModel);
     ResponseModel responseModel;
-    if(response.statusCode ==200) {
+    if (response.statusCode == 200) {
       await getAddressList();
       String message = response.body["message"];
       responseModel = ResponseModel(true, message);
       await saveUserAddress(addressModel);
-    } else{
+    } else {
       print("Couldn't save the address");
       responseModel = ResponseModel(false, response.statusText!);
     }
@@ -151,16 +159,16 @@ class LocationController extends GetxController implements GetxService {
 
   Future<void> getAddressList() async {
     Response response = await locationRepo.getAllAddress();
-    if(response.statusCode==200) {
-      _addressList=[];
-      _allAddressList=[];
+    if (response.statusCode == 200) {
+      _addressList = [];
+      _allAddressList = [];
       response.body.forEach((address) {
         _addressList.add(AddressModel.fromJson(address));
         _allAddressList.add(AddressModel.fromJson(address));
       });
     } else {
-      _addressList=[];
-      _allAddressList=[];
+      _addressList = [];
+      _allAddressList = [];
     }
     update();
   }
@@ -171,9 +179,12 @@ class LocationController extends GetxController implements GetxService {
   }
 
   void clearAddressList() {
-    _addressList=[];
-    _allAddressList=[];
+    _addressList = [];
+    _allAddressList = [];
     update();
+  }
 
+  String getUserAddressFromLocalStorage() {
+    return locationRepo.getUserAddress();
   }
 }

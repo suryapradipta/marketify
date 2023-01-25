@@ -6,6 +6,7 @@ import 'package:marketify/controllers/auth_controller.dart';
 import 'package:marketify/controllers/location_controller.dart';
 import 'package:marketify/controllers/user_controller.dart';
 import 'package:marketify/models/address_model.dart';
+import 'package:marketify/pages/address/pick_address_map.dart';
 import 'package:marketify/routes/route_helper.dart';
 import 'package:marketify/utils/colors.dart';
 import 'package:marketify/widgets/app_text_field.dart';
@@ -36,12 +37,24 @@ class _AddAddressPageState extends State<AddAddressPage> {
   @override
   void initState() {
    super.initState();
+   // check whether user sign in or not
    _isLogged = Get.find<AuthController>().userLoggedIn();
-   if(_isLogged&&Get.find<UserController>().userModel == null) {
-     Get.find<UserController>().getUserInfo();
-   }
+   // check the user information
+    if (_isLogged && Get.find<UserController>().userModel == null) {
+      // get the user info from database
+      Get.find<UserController>().getUserInfo();
+    }
+
    // actual location
+   // check whether user has address
    if(Get.find<LocationController>().addressList.isNotEmpty) {
+     // bug fix
+     if(Get.find<LocationController>().getUserAddressFromLocalStorage()=="") {
+       Get.find<LocationController>().saveUserAddress(
+         Get.find<LocationController>().addressList.last
+       );
+     }
+
      Get.find<LocationController>().getUserAddress();
      _cameraPosition = CameraPosition(target: LatLng(
        double.parse(Get.find<LocationController>().getAddress["latitude"]),
@@ -98,6 +111,17 @@ class _AddAddressPageState extends State<AddAddressPage> {
                       CameraPosition(
                           target: _initialPosition,
                           zoom: 17),
+                        onTap: (latlng){
+                        print("google maps tapped");
+                            Get.toNamed(RouteHelper.getPickAddressPage(),
+                              arguments: PickAddressMap(
+                                fromSignup: false,
+                                fromAddress: true,
+                                // passed this cause error
+                                googleMapController: locationController.mapController,
+                              )
+                            );
+                        },
                         zoomControlsEnabled: false,
                         compassEnabled: false,
                         indoorViewEnabled: true,
@@ -109,6 +133,9 @@ class _AddAddressPageState extends State<AddAddressPage> {
                         onCameraMove: ((position)=> _cameraPosition = position),
                         onMapCreated: (GoogleMapController controller) {
                           locationController.setMapController(controller);
+                          // if(Get.find<LocationController>().addressList.isEmpty) {
+                          //   // locationController.getCurrentLocation(true, mapController: controller
+                          // }
                         },
                       )
                     ],
