@@ -55,6 +55,21 @@ class LocationController extends GetxController implements GetxService {
 
   Position get pickPosition => _pickPosition;
 
+  // for zoned service
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  // whether the user is in service zone or not
+  bool _inZone = false;
+
+  bool get inZone => _inZone;
+
+  // show and hide the button as the map loads
+  bool _buttonDisabled = true;
+
+  bool get buttonDisabled => _buttonDisabled;
+
   void setMapController(GoogleMapController mapController) {
     _mapController = _mapController;
   }
@@ -86,6 +101,14 @@ class LocationController extends GetxController implements GetxService {
               speedAccuracy: 1);
         }
 
+        ResponseModel _responseModel = await getZone(
+            position.target.latitude.toString(),
+            position.target.longitude.toString(),
+            false);
+
+        // if button value is false, the user in the service area
+        _buttonDisabled = !_responseModel.isSuccess;
+
         if (_changeAddress) {
           String _address = await getAddressfromGeocode(LatLng(
             position.target.longitude,
@@ -100,6 +123,8 @@ class LocationController extends GetxController implements GetxService {
       }
       _loading = false;
       update();
+    } else {
+      _updateAddressData = true;
     }
   }
 
@@ -186,5 +211,33 @@ class LocationController extends GetxController implements GetxService {
 
   String getUserAddressFromLocalStorage() {
     return locationRepo.getUserAddress();
+  }
+
+  void setAddAddressData() {
+    _position = _pickPosition;
+    _placemark = _pickPlacemark;
+    _updateAddressData = false;
+    update();
+  }
+
+  Future<ResponseModel> getZone(String lat, String lng, bool markerLoad) async {
+    late ResponseModel _responseModel;
+    if (markerLoad) {
+      _loading = true;
+    } else {
+      _isLoading = true;
+    }
+    update();
+    await Future.delayed(const Duration(seconds: 2), () {
+      _responseModel = ResponseModel(true, "success");
+      if (markerLoad) {
+        _loading = false;
+      } else {
+        _isLoading = false;
+      }
+      _inZone = true;
+    });
+    update();
+    return _responseModel;
   }
 }
