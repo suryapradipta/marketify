@@ -9,20 +9,21 @@ import '../api/api_client.dart';
 class LocationRepo {
   final ApiClient apiClient;
   final SharedPreferences sharedPreferences;
+
   LocationRepo({required this.apiClient, required this.sharedPreferences});
 
   Future<Response> getAddressfromGeocode(LatLng latlng) async {
     return await apiClient.getData('${AppConstants.GEOCODE_URI}'
-        '?lat=${latlng.latitude}&lng=${latlng.longitude}'
-    );
+        '?lat=${latlng.latitude}&lng=${latlng.longitude}');
   }
 
   String getUserAddress() {
-    return sharedPreferences.getString(AppConstants.USER_ADDRESS)??"";
+    return sharedPreferences.getString(AppConstants.USER_ADDRESS) ?? "";
   }
 
   Future<Response> addAddress(AddressModel addressModel) async {
-    return await apiClient.postData(AppConstants.ADD_USER_ADDRESS, addressModel.toJson());
+    return await apiClient.postData(
+        AppConstants.ADD_USER_ADDRESS, addressModel.toJson());
   }
 
   Future<Response> getAllAddress() async {
@@ -32,6 +33,12 @@ class LocationRepo {
   Future<bool> saveUserAddress(String address) async {
     // change the old token for different user
     apiClient.updateHeader(sharedPreferences.getString(AppConstants.TOKEN)!);
-    return await sharedPreferences.setString(AppConstants.USER_ADDRESS, address);
+    return await sharedPreferences.setString(
+        AppConstants.USER_ADDRESS, address);
+  }
+
+  Future<Response> getZone(String lat, String lng) async {
+    return await apiClient
+        .getData('${AppConstants.ZONE_URI}?lat=$lat&lng=$lng');
   }
 }
