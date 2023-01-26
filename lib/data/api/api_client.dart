@@ -19,7 +19,6 @@ class ApiClient extends GetConnect implements GetxService {
   // Map for strong data locally or converting data to map
   late Map<String, String> _mainHeaders;
 
-
   ApiClient({required this.appBaseUrl, required this.sharedPreferences}) {
     baseUrl = appBaseUrl;
 
@@ -29,16 +28,16 @@ class ApiClient extends GetConnect implements GetxService {
     // when talked to server, we have to call _mainHeaders
     // when want to get responses from the server, we tell the server look this is the get request i want you send me the json data
     // the data is from coming from client
-    
+
     // the token always founded once user register
     // for new devices token is empty
-    token = sharedPreferences.getString(AppConstants.TOKEN)??"";
+    token = sharedPreferences.getString(AppConstants.TOKEN) ?? "";
     _mainHeaders = {
       // request json data to server
-      'Content-type' : 'application/json; charset=UTF-8',
+      'Content-type': 'application/json; charset=UTF-8',
 
       // bearer type use for authentication
-      'Authorization' : 'Bearer $token',
+      'Authorization': 'Bearer $token',
     };
   }
 
@@ -52,23 +51,22 @@ class ApiClient extends GetConnect implements GetxService {
   // request for getting data from server
   Future<Response> getData(String uri, {Map<String, String>? headers}) async {
     try {
-      Response response = await get(uri,
-      headers:headers??_mainHeaders
-      );
+      Response response = await get(uri, headers: headers ?? _mainHeaders);
+      print(response.body.toString());
       return response;
-    }catch(e){
+    } catch (e) {
       return Response(statusCode: 1, statusText: e.toString());
     }
   }
 
   // post request method
-  Future <Response> postData(String uri, dynamic body) async {
+  Future<Response> postData(String uri, dynamic body) async {
     print("POST METHOD= " + body.toString() + "check");
     try {
       Response response = await post(uri, body, headers: _mainHeaders);
       print("Posting= " + response.toString());
       return response;
-    }catch(e) {
+    } catch (e) {
       print(e.toString());
       return Response(statusCode: 1, statusText: e.toString());
     }
