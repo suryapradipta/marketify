@@ -1,7 +1,9 @@
 // init() function to manage dependencies
 
 import 'package:get/get.dart';
+import 'package:marketify/controllers/order_controller.dart';
 import 'package:marketify/data/repository/location_repo.dart';
+import 'package:marketify/data/repository/order_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controllers/auth_controller.dart';
@@ -39,6 +41,7 @@ Future<void> init() async {
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => CartRepo(sharedPreferences: Get.find()));
   Get.lazyPut(() => LocationRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+  Get.lazyPut(() => OrderRepo(apiClient: Get.find()));
 
 
   // controllers
@@ -49,6 +52,7 @@ Future<void> init() async {
   Get.lazyPut(() => RecommendedProductController(recommendedProductRepo: Get.find()));
   Get.lazyPut(() => CartController(cartRepo: Get.find()));
   Get.lazyPut(() => LocationController(locationRepo: Get.find()));
+  Get.lazyPut(() => OrderController(orderRepo: Get.find()));
 
 }
 

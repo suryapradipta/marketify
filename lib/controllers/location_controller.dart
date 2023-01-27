@@ -152,7 +152,7 @@ class LocationController extends GetxController implements GetxService {
 
   late Map<String, dynamic> _getAddress;
 
-  Map get getAddress => _getAddress;
+  Map<String, dynamic> get getAddress => _getAddress;
 
   AddressModel getUserAddress() {
     late AddressModel _addressModel;
