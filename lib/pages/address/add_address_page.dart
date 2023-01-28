@@ -11,6 +11,7 @@ import 'package:marketify/routes/route_helper.dart';
 import 'package:marketify/utils/colors.dart';
 import 'package:marketify/widgets/app_text_field.dart';
 
+import '../../base/custom_app_bar.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/big_text.dart';
@@ -70,10 +71,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Address Page"),
-        backgroundColor: AppColors.mainColor,
-      ),
+      appBar: CustomAppBar(title: "Address"),
       body: GetBuilder<UserController>(builder: (userController) {
         if (userController.userModel != null &&
             _contactPersonName.text.isEmpty) {

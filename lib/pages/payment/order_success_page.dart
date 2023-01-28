@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marketify/routes/route_helper.dart';
+import 'package:marketify/utils/colors.dart';
 
 import '../../base/custom_button.dart';
 import '../../utils/dimensions.dart';
@@ -26,21 +27,21 @@ class OrderSuccessPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
+              Icon(
                 status == 1
-                    ? "assets/image/checked.png"
-                    : "assets/image/warning.png",
-                width: 100,
-                height: 100,
+                    ? Icons.check_circle_outline
+                    : Icons.warning_amber_outlined,
+                size: 100,
+                color: AppColors.mainColor,
               ),
               SizedBox(
-                height: Dimensions.height45,
+                height: Dimensions.height30,
               ),
               Text(
                 status == 1
                     ? 'You placed the order successfully'
                     : 'Your order failed',
-                style: TextStyle(fontSize: Dimensions.font26),
+                style: TextStyle(fontSize: Dimensions.font20),
               ),
               SizedBox(
                 height: Dimensions.height20,
@@ -48,7 +49,7 @@ class OrderSuccessPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: Dimensions.height20,
-                    vertical: Dimensions.height20),
+                    vertical: Dimensions.height10),
                 child: Text(
                   status == 1 ? 'Successful order' : 'Failed order',
                   style: TextStyle(
@@ -58,7 +59,7 @@ class OrderSuccessPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: Dimensions.height10,
               ),
               Padding(
                 padding: EdgeInsets.all(Dimensions.height20),
