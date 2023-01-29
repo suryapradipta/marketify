@@ -10,6 +10,7 @@ import 'package:marketify/widgets/big_text.dart';
 import 'package:marketify/widgets/small_text.dart';
 import 'package:get/get.dart';
 
+import '../../base/common_text_button.dart';
 import '../../base/no_data_page.dart';
 import '../../base/show_custom_snakbar.dart';
 import '../../controllers/cart_controller.dart';
@@ -18,12 +19,17 @@ import '../../controllers/order_controller.dart';
 import '../../controllers/user_controller.dart';
 import '../../models/place_order_model.dart';
 import '../../routes/route_helper.dart';
+import '../../utils/styles.dart';
+import '../../widgets/app_text_field.dart';
+import '../order/delivery_options.dart';
+import '../order/payment_option_button.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _noteController = TextEditingController();
     return Scaffold(
       body: Stack(
         children: [
@@ -239,97 +245,191 @@ class CartPage extends StatelessWidget {
 
 
 
-      bottomNavigationBar: GetBuilder<CartController>(builder: (cartController){
-        return Container(
-          height: Dimensions.bottomHeightBar,
-          padding: EdgeInsets.only(top: Dimensions.height30, bottom: Dimensions.height30, left: Dimensions.width20, right: Dimensions.width20),
-          decoration: BoxDecoration(
-              color: AppColors.buttonBackgroundColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(Dimensions.radius20*2),
-                topRight:  Radius.circular(Dimensions.radius20*2),
-              )
-          ),
-          child: cartController.getItems.length>0?Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.only(top: Dimensions.height20,bottom: Dimensions.height20, left: Dimensions.width20, right: Dimensions.width20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.radius20),
-                    color: Colors.white
-                ),
-                child: Row(
-                  children: [
-
-
-
-
-                    // PRICE SECTION
-                    BigText(text: "\$ "+cartController.totalAmount.toString()),
-
-                    SizedBox(width: Dimensions.width10/2,),
-                  ],
-                ),
+      bottomNavigationBar: GetBuilder<OrderController>(builder: (orderController) {
+        _noteController.text = orderController.foodNote;
+        return GetBuilder<CartController>(builder: (cartController){
+          return Container(
+              height: Dimensions.bottomHeightBar + 50,
+              padding: EdgeInsets.only(top: Dimensions.height10, bottom: Dimensions.height10, left: Dimensions.width20, right: Dimensions.width20),
+              decoration: BoxDecoration(
+                  color: AppColors.buttonBackgroundColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(Dimensions.radius20*2),
+                    topRight:  Radius.circular(Dimensions.radius20*2),
+                  )
               ),
+              child: cartController.getItems.length>0? Column(
+                children: [
+                  InkWell(
+                    onTap: ()=> showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (_) {
+                          return Column(
+                            children: [
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height*0.9,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(Dimensions.radius20),
+                                            topRight: Radius.circular(Dimensions.radius20)
 
-              // PRICE AND ADD TO CART SECTION
-              GestureDetector(
-                onTap: () {
-                  // popularProduct.addItem(product);
+                                        )
+                                    ),
+                                    child: Column(
+
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              left: Dimensions.width20,
+                                              right: Dimensions.width20,
+                                              top: Dimensions.height20
+                                          ),
+                                          height: 520,
+
+                                          child: Column(
+
+                                            children: [
+                                              PaymentOptionButton(
+                                                  icon: Icons.money,
+                                                  title: 'Cash on Delivery',
+                                                  subTitle: 'You pay after getting your products',
+                                                  index: 0),
+
+                                              SizedBox(height: Dimensions.height10,),
+                                              PaymentOptionButton(
+                                                  icon: Icons.paypal_outlined,
+                                                  title: 'Digital Payment',
+                                                  subTitle: 'Safer and Faster Way of Payment',
+                                                  index: 1),
+
+                                              SizedBox(height: Dimensions.height30,),
+                                              Text("Delivery Options", style: robotoMedium,),
+                                              SizedBox(height: Dimensions.height10/2,),
+                                              DeliveryOptions(value: "delivery",
+                                                  title: "home delivery",
+                                                  amount: double.parse(Get.find<CartController>().totalAmount.toString()),
+                                                  isFree: false),
 
 
-                  // ADD TO THE ORDER TO HISTORY WHILE CHECKOUT
-                  // cartController.addToHistory();
+                                              SizedBox(height: Dimensions.height10/2,),
+                                              DeliveryOptions(
+                                                  value: "take away",
+                                                  title: "take away",
+                                                  amount: 10.0,
+                                                  isFree: true),
 
-                  if(Get.find<AuthController>().userLoggedIn()) {
-                    print("logged in?");
-                    if(Get.find<LocationController>().addressList.isEmpty) {
-                      Get.toNamed(RouteHelper.getAddressPage());
-                    }
-                    else {
-                      var location = Get.find<LocationController>().getUserAddress();
-                      var cart = Get.find<CartController>().getItems;
-                      var user = Get.find<UserController>().userModel;
-                      PlaceOrderBody placeOrder = PlaceOrderBody(
-                        cart: cart,
-                        orderAmount: 100.0,
-                        orderNote: "Not about the food",
-                        address: location.address,
-                        latitude: location.latitude,
-                        longitude: location.longitude,
-                        contactPersonName: user!.name,
-                        contactPersonNumber: user.phone,
-                        scheduleAt: '',
-                        distance: 10.0
-                      );
-                      Get.find<OrderController>().placeOrder(
-                          placeOrder,
-                          _callback
-                      );
-                    }
-                  }
-                  else {
-                    Get.toNamed(RouteHelper.getSignInPage());
-                  }
+                                              SizedBox(height: Dimensions.height20,),
+                                              Text("Additonal Notes", style: robotoMedium,),
+                                              AppTextField(
+                                                maxLines: true,
+                                                textController: _noteController,
+                                                hintText: "",
+                                                icon: Icons.note,
 
-                },
-                child: Container(
-                  padding: EdgeInsets.only(
-                      top: Dimensions.height20,
-                      bottom: Dimensions.height20,
-                      left: Dimensions.width20,
-                      right: Dimensions.width20),
-                  child: BigText(text: "Check out", color: Colors.white,),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius20),
-                      color: AppColors.mainColor
+
+                                              ),
+
+
+
+
+                                            ],
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        }).whenComplete(() => orderController.setFoodNote(_noteController.text.trim())),
+                    child: SizedBox(
+                      width: double.maxFinite,
+                      child: CommonTextButton(text: "Payment Option"),
+                    ),
                   ),
-                ),
-              )
-            ],
-          ):Container(),
-        );
+                  SizedBox(height: Dimensions.height10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(top: Dimensions.height20,bottom: Dimensions.height20, left: Dimensions.width20, right: Dimensions.width20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(Dimensions.radius20),
+                            color: Colors.white
+                        ),
+                        child: Row(
+                          children: [
+
+
+
+
+                            // PRICE SECTION
+                            BigText(text: "\$ "+cartController.totalAmount.toString()),
+
+                            SizedBox(width: Dimensions.width10/2,),
+                          ],
+                        ),
+                      ),
+
+                      // PRICE AND ADD TO CART SECTION
+                      GestureDetector(
+                          onTap: () {
+                            // popularProduct.addItem(product);
+
+
+                            // ADD TO THE ORDER TO HISTORY WHILE CHECKOUT
+                            // cartController.addToHistory();
+
+                            if(Get.find<AuthController>().userLoggedIn()) {
+                              print("logged in?");
+                              if(Get.find<LocationController>().addressList.isEmpty) {
+                                Get.toNamed(RouteHelper.getAddressPage());
+                              }
+                              else {
+                                var location = Get.find<LocationController>().getUserAddress();
+                                var cart = Get.find<CartController>().getItems;
+                                var user = Get.find<UserController>().userModel;
+                                PlaceOrderBody placeOrder = PlaceOrderBody(
+                                    cart: cart,
+                                    orderAmount: 100.0,
+                                    orderNote: orderController.foodNote,
+                                    address: location.address,
+                                    latitude: location.latitude,
+                                    longitude: location.longitude,
+                                    contactPersonName: user!.name,
+                                    contactPersonNumber: user.phone,
+                                    scheduleAt: '',
+                                    distance: 10.0,
+                                    paymentMethod: orderController.paymentIndex==0?'cash_on_delivery':'digital_payment',
+                                    orderType: orderController.orderType
+                                );
+
+                                Get.find<OrderController>().placeOrder(
+                                    placeOrder,
+                                    _callback
+                                );
+                              }
+                            }
+                            else {
+                              Get.toNamed(RouteHelper.getSignInPage());
+                            }
+
+                          },
+                          child: CommonTextButton(text: "Check Out",)
+                      )
+                    ],
+                  ),
+
+                ],
+              ) : Container()
+          );
+        });
       }),
     );
   }
@@ -339,7 +439,14 @@ class CartPage extends StatelessWidget {
       Get.find<CartController>().clear();
       Get.find<CartController>().removeCartSharedPreference();
       Get.find<CartController>().addToHistory();
-      Get.offNamed(RouteHelper.getPaymentPage(orderID, Get.find<UserController>().userModel!.id));
+
+      if(Get.find<OrderController>().paymentIndex==0) {
+        Get.offNamed(RouteHelper.getOrderSuccessPage(orderID, "success"));
+      }else {
+        Get.offNamed(RouteHelper.getPaymentPage(orderID, Get.find<UserController>().userModel!.id));
+
+      }
+
     } else {
       showCustomSnackBar(message);
     }
