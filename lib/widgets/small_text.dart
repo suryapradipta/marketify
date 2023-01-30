@@ -5,22 +5,22 @@ class SmallText extends StatelessWidget {
   final String text;
   double size;
   double height;
-  SmallText({Key? key, this.color = const Color(0xFFccc7c5),
-    required this.text,
-    this.size = 12, //\\ text size
-    this.height = 1.2 //\\ space between each line, kaya 1.5 di word
-  }) : super(key: key);
+
+  SmallText(
+      {Key? key,
+      this.color = const Color(0xFFccc7c5),
+      required this.text,
+      this.size = 12,
+      this.height = 1.2 // space between each line, kaya 1.5 di word
+      })
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
-          fontFamily: 'Roboto',
-          color: color,
-          fontSize: size,
-        height: height
-      ),
+          fontFamily: 'Roboto', color: color, fontSize: size, height: height),
     );
   }
 }
