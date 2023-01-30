@@ -26,12 +26,11 @@ class AccountWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
           color: Colors.white,
+          borderRadius: BorderRadius.circular(Dimensions.radius20 / 4),
           boxShadow: [
           BoxShadow(
-            blurRadius: 1,
-            offset: Offset(0, 2),
-            color: Colors.grey.withOpacity(0.2),
-          )
+            color: Colors.grey[200]!, blurRadius: 5, spreadRadius: 1,
+          ),
         ]
       ),
     );
