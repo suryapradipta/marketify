@@ -10,6 +10,8 @@ import 'package:marketify/widgets/icon_and_text_widget.dart';
 import 'package:marketify/widgets/small_text.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/auth_controller.dart';
+import '../../controllers/user_controller.dart';
 import '../../models/products_model.dart';
 import '../../routes/route_helper.dart';
 import '../../utils/app_constants.dart';
@@ -22,6 +24,7 @@ class FoodPageBody extends StatefulWidget {
 }
 
 class _FoodPageBodyState extends State<FoodPageBody> {
+
   PageController pageController = PageController(viewportFraction: 0.85); // show next and previous slide page menu on hero section
   var _currPageValue = 0.0;
   double _scaleFactor = 0.8;
@@ -46,8 +49,107 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
+    bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
+    if (_userLoggedIn) {
+      Get.find<UserController>().getUserInfo();
+    }
     return Column(
       children: [
+
+
+
+        SizedBox(
+          height: Dimensions.height20,
+        ),
+
+
+        GetBuilder<UserController>(builder: (userController){
+          return Container(
+            width: Dimensions.screenWidth,
+            height: Dimensions.height20 * 5,
+            margin: EdgeInsets.only(
+                left: Dimensions.width30, right: Dimensions.width30),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 5),
+                    blurRadius: 10,
+                    color: Colors.grey[200]!
+                  )
+                ]),
+            child: Container(
+              padding: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius:40,
+                    backgroundImage: AssetImage(
+                        "assets/image/profile_bg.png"
+                    ),
+                  ),
+                  SizedBox(width: 10,),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Welcome!",
+
+                        style: TextStyle(
+                            color: AppColors.mainColor,
+                            fontSize: 18,
+                            decoration: TextDecoration.none
+                        ),
+                      ),
+                      SizedBox(height: Dimensions.height10,),
+                      Text(
+                        userController.userModel!.name,
+                        style: TextStyle(
+                            color:Color(0xFF3b3f42),
+                            fontSize: 18,
+                            decoration: TextDecoration.none
+                        ),
+                      ),
+                    ],
+                  ),
+                  Expanded(child: Container()),
+                  Container(
+                    width: Dimensions.width10*5,
+                    height: Dimensions.height10*5,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.radius15),
+                        color: AppColors.mainColor
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.notifications,
+                        color: Colors.white,
+                        size: Dimensions.iconSize24,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+
+        }),
+        SizedBox(
+          height: Dimensions.height30,
+        ),
+
+
+
+
+
+
+
+
+
+
+
         // SLIDER POPULAR FOOD CONTAINER SECTION
         // if want to get data, wrap using GetBuilder
         GetBuilder<PopularProductController>(builder:(popularProducts){

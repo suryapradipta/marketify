@@ -37,15 +37,15 @@ class _MainFoodPageState extends State<MainFoodPage> {
               child: Container(
                 margin: EdgeInsets.only(
                     top: Dimensions.height45, bottom: Dimensions.height15),
-                //\\ Change margin for the header from top and bottom
+                // change margin for the header from top and bottom
                 padding: EdgeInsets.only(
                     left: Dimensions.width20, right: Dimensions.width20),
-                //\\ Change the padding header text supaya lebih ke dalam
+                // change the padding header text supaya lebih ke dalam
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //\\ Move search bar to right side
+                  // move search bar to right side
                   children: [
-                    Column(
+                    /*Column(
                       // Header - text on the top left
                       children: [
                         BigText(text: "Marketify", color: AppColors.mainColor),
@@ -56,10 +56,10 @@ class _MainFoodPageState extends State<MainFoodPage> {
                           ],
                         )
                       ],
-                    ),
+                    ),*/
 
                     // SEARCH ICON SECTION
-                    Center(
+                    /*Center(
                       //\\ make sure the icon on the center border
                       child: Container(
                         //\\ Header - search button on the top right
@@ -76,7 +76,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                           color: AppColors.mainColor,
                         ),
                       ),
-                    )
+                    )*/
                   ],
                 ),
               ),
