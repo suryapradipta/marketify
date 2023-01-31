@@ -82,7 +82,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage("assets/image/profile_bg.png"),
+                    backgroundImage: AssetImage("assets/image/profile1.png"),
                   ),
                   SizedBox(
                     width: 10,
