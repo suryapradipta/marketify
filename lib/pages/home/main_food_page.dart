@@ -9,7 +9,8 @@ import 'package:get/get.dart';
 import '../../controllers/popular_product_controller.dart';
 import '../../controllers/recommended_product_controller.dart';
 
-class MainFoodPage extends StatefulWidget { // add stful -> add MainFoodPage -> import package from Container()
+class MainFoodPage extends StatefulWidget {
+  // add stful -> add MainFoodPage -> import package from Container()
   const MainFoodPage({Key? key}) : super(key: key);
 
   @override
@@ -30,59 +31,64 @@ class _MainFoodPageState extends State<MainFoodPage> {
     // it will talked to the server, and refresh the content
     return RefreshIndicator(
         child: Column(
-      children: [
-        // HEADER SECTION
-        Container(
-          child: Container (
-            margin: EdgeInsets.only(top: Dimensions.height45, bottom: Dimensions.height15), //\\ Change margin for the header from top and bottom
-            padding: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20),//\\ Change the padding header text supaya lebih ke dalam
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween, //\\ Move search bar to right side
-              children: [
-                Column(
-                  // Header - text on the top left
+          children: [
+            // HEADER SECTION
+            Container(
+              child: Container(
+                margin: EdgeInsets.only(
+                    top: Dimensions.height45, bottom: Dimensions.height15),
+                //\\ Change margin for the header from top and bottom
+                padding: EdgeInsets.only(
+                    left: Dimensions.width20, right: Dimensions.width20),
+                //\\ Change the padding header text supaya lebih ke dalam
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //\\ Move search bar to right side
                   children: [
-                    BigText(text: "Marketify", color: AppColors.mainColor),
-                    Row(
+                    Column(
+                      // Header - text on the top left
                       children: [
-                        SmallText(text: "Badung", color: Colors.black54),
-                        Icon(Icons.arrow_drop_down_rounded)
+                        BigText(text: "Marketify", color: AppColors.mainColor),
+                        Row(
+                          children: [
+                            SmallText(text: "Badung", color: Colors.black54),
+                            Icon(Icons.arrow_drop_down_rounded)
+                          ],
+                        )
                       ],
+                    ),
+
+                    // SEARCH ICON SECTION
+                    Center(
+                      //\\ make sure the icon on the center border
+                      child: Container(
+                        //\\ Header - search button on the top right
+                        width: Dimensions.height45,
+                        height: Dimensions.height45,
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: Dimensions.iconSize24,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius15),
+                          color: AppColors.mainColor,
+                        ),
+                      ),
                     )
                   ],
                 ),
-
-                // SEARCH ICON SECTION
-                Center( //\\ make sure the icon on the center border
-                  child: Container( //\\ Header - search button on the top right
-                    width: Dimensions.height45,
-                    height: Dimensions.height45,
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                      size: Dimensions.iconSize24,),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius15),
-                      color: AppColors.mainColor,
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
+
+            // SHOW THE BODY SECTION
+            Expanded(
+                child: SingleChildScrollView(
+              child: FoodPageBody(),
+            )),
+          ],
         ),
-
-
-
-
-        // SHOW THE BODY SECTION
-        Expanded(child: SingleChildScrollView(
-          child: FoodPageBody(),
-        )),
-      ],
-    ),
         onRefresh: _loadResource);
   }
 }
-
-
