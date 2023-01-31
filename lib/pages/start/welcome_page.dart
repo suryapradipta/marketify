@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:marketify/routes/route_helper.dart';
 
 
+import '../../controllers/popular_product_controller.dart';
+import '../../controllers/recommended_product_controller.dart';
 import '../../utils/colors.dart';
 import '../../widgets/app_large_text.dart';
 import '../../widgets/app_text.dart';
@@ -16,12 +18,24 @@ class WelcomePage extends StatefulWidget {
   _WelcomePageState createState() => _WelcomePageState();
 }
 
+
+
 class _WelcomePageState extends State<WelcomePage> {
   var images = {
     "assets/image/welcome-one.png":"Gives you a taste of the Canada mountains, from Horseshoe Bay in the north of Vancouver to Pemberton. ",
     "assets/image/welcome-two.png":"Moraine Lake is yet another astonishing geographical location that you cannot afford to miss out on if you’re traveling along the Icefields Parkway",
     "assets/image/welcome-three.png":"The Icefields Parkway offers you the picturesque panorama of Alberta’s most talked about mountain vistas. ",
   };
+
+  Future<void> _loadResource() async {
+    await Get.find<PopularProductController>().getPopularProductList();
+    await Get.find<RecommendedProductController>().getRecommendedProductList();
+  }
+
+  void initState() {
+    super.initState();
+    _loadResource();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       SizedBox(height: 40,),
                       GestureDetector(
                         onTap: (){
-                          Get.toNamed(RouteHelper.getCartPage());
+                          Get.toNamed(RouteHelper.getInitial());
                         },
                         child: Container(
                             width: 200,
