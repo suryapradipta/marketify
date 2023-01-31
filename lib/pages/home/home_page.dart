@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _controller = PersistentTabController(initialIndex: 0);
+    _controller = PersistentTabController(initialIndex: 1);
 
   }
 
@@ -52,12 +52,13 @@ class _HomePageState extends State<HomePage> {
   // plug in
   List<Widget> _buildScreens() {
     return [
-      MainFoodPage(),
       // SignInPage(),
-      Container(child: Center(child: Text("Next next next next page"))),
+      // Container(child: Center(child: Text("Next next next next page"))),
       CartHistory(),
+      MainFoodPage(),
+
       AccountPage(),
-      Container(child: Center(child: Text("Next next next next page"))),
+      // Container(child: Center(child: Text("Next next next next page"))),
     ];
   }
 
@@ -65,31 +66,32 @@ class _HomePageState extends State<HomePage> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
 
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home),
-        title: ("Home"),
-        activeColorPrimary: AppColors.mainColor,
-        // activeColorSecondary: Colors.white,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
 
 
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.archivebox_fill),
-        title: ("Archive"),
-        activeColorPrimary: AppColors.mainColor,
-
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
+      // PersistentBottomNavBarItem(
+      //   icon: Icon(CupertinoIcons.archivebox_fill),
+      //   title: ("Archive"),
+      //   activeColorPrimary: AppColors.mainColor,
+      //
+      //   inactiveColorPrimary: CupertinoColors.systemGrey,
+      // ),
 
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.cart_fill),
         title: ("Cart"),
         activeColorPrimary: AppColors.mainColor,
-        activeColorSecondary: Colors.white,
+        // activeColorSecondary: Colors.white,
 
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.home),
+        title: ("Home"),
+        activeColorPrimary: AppColors.mainColor,
+        activeColorSecondary: Colors.white,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+
 
 
 
@@ -101,12 +103,12 @@ class _HomePageState extends State<HomePage> {
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
 
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.settings),
-        title: ("Settings"),
-        activeColorPrimary: AppColors.mainColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
+      // PersistentBottomNavBarItem(
+      //   icon: Icon(CupertinoIcons.settings),
+      //   title: ("Settings"),
+      //   activeColorPrimary: AppColors.mainColor,
+      //   inactiveColorPrimary: CupertinoColors.systemGrey,
+      // ),
     ];
   }
 
