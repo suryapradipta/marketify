@@ -64,13 +64,16 @@ class SignInPage extends StatelessWidget {
               Container(
                 height: Dimensions.screenHeight*0.25,
                 child: Center(
-                  child: CircleAvatar(
+                  child: Image.asset("assets/image/shopping_store.png",
+                    height: MediaQuery.of(context).size.height*0.33,
+                    width: MediaQuery.of(context).size.width*0.33,),
+                  /*child: CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 80,
                     backgroundImage: AssetImage(
                         "assets/image/logo part 1.png"
                     ),
-                  ),
+                  ),*/
                 ),
               ),
 
@@ -90,7 +93,7 @@ class SignInPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Sign into your account",
+                      "Sign in to continue.",
                       style: TextStyle(
                         fontSize: Dimensions.font20,
                         // fontWeight: FontWeight.bold
@@ -122,11 +125,11 @@ class SignInPage extends StatelessWidget {
               SizedBox(height: Dimensions.height20,),
 
               // TAG LINE
-              Row(
+              /*Row(
                 children: [
                   // supaya text nya ke kanan
                   Expanded(child: Container()),
-                  RichText(
+                  *//*RichText(
                       text: TextSpan(
                           text: "Sign into your account",
                           style: TextStyle(
@@ -134,12 +137,12 @@ class SignInPage extends StatelessWidget {
                               fontSize: Dimensions.font20
                           )
                       )
-                  ),
+                  ),*//*
                   SizedBox(width: Dimensions.width20,)
                 ],
-              ),
+              ),*/
 
-              SizedBox(height: Dimensions.screenHeight*0.05,),
+              SizedBox(height: Dimensions.screenHeight*0.03,),
 
               // SIGN IN BUTTON
               GestureDetector(
@@ -150,7 +153,7 @@ class SignInPage extends StatelessWidget {
                   width: Dimensions.screenWidth/2,
                   height: Dimensions.screenHeight/13,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius30),
+                      borderRadius: BorderRadius.circular(Dimensions.radius20),
                       color: AppColors.mainColor
                   ),
                   child: Center(

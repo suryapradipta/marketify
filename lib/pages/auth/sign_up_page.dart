@@ -94,13 +94,10 @@ class SignUpPage extends StatelessWidget {
               Container(
                 height: Dimensions.screenHeight*0.25,
                 child: Center(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 80,
-                    backgroundImage: AssetImage(
-                        "assets/image/logo part 1.png"
-                    ),
-                  ),
+                  child: Image.asset("assets/image/shopping_store.png",
+                    height: MediaQuery.of(context).size.height*0.33,
+                    width: MediaQuery.of(context).size.width*0.33,),
+
                 ),
               ),
 
@@ -133,6 +130,9 @@ class SignUpPage extends StatelessWidget {
               SizedBox(height: Dimensions.height20,),
 
 
+              SizedBox(height: Dimensions.screenHeight*0.03,),
+
+              
               // SIGN UP BUTTON
               GestureDetector(
                 onTap: (){
@@ -142,7 +142,7 @@ class SignUpPage extends StatelessWidget {
                   width: Dimensions.screenWidth/2,
                   height: Dimensions.screenHeight/13,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius30),
+                      borderRadius: BorderRadius.circular(Dimensions.radius20),
                       color: AppColors.mainColor
                   ),
                   child: Center(
@@ -154,25 +154,35 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: Dimensions.height10,),
+              SizedBox(height: Dimensions.screenHeight*0.05,),
+
 
               // TAG LINE
               // supaya text bisa di pencet
               RichText(
                   text: TextSpan(
-                      recognizer: TapGestureRecognizer()..onTap=()=>Get.back(),
                       text: "Have an account already?",
                       style: TextStyle(
                           color: Colors.grey[500],
                           fontSize: Dimensions.font20
-                      )
+                      ),
+                      children: [
+                        TextSpan(
+                            recognizer: TapGestureRecognizer()..onTap=()=>Get.back(),
+                            text: " Sign in",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.mainBlackColor,
+                                fontSize: Dimensions.font20
+                            )),
+                      ]
                   )
               ),
 
               SizedBox(height: Dimensions.screenHeight*0.05,),
 
               // SIGN UP OPTION
-              RichText(
+             /* RichText(
                   text: TextSpan(
                       text: "Sign up using one of the following methods",
                       style: TextStyle(
@@ -191,7 +201,7 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                 )),
-              )
+              )*/
 
 
 
