@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
 
           // home: SignInPage(),
           // home: SplashScreen(),
-          initialRoute: RouteHelper.getSplashPage(),
+          // initialRoute: RouteHelper.getSplashPage(),
+          initialRoute: RouteHelper.welcomePage,
           getPages: RouteHelper.routes,
           theme:
               ThemeData(primaryColor: AppColors.mainColor, fontFamily: "Lato"),
