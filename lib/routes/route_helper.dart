@@ -12,9 +12,11 @@ import '../pages/home/home_page.dart';
 import '../pages/home/main_food_page.dart';
 import '../pages/payment/order_success_page.dart';
 import '../pages/splash/splash_page.dart';
+import '../start/welcome_page.dart';
 
 class RouteHelper {
   static const String splashPage = "/splash-page";
+  static const String welcomePage = "/welcome-page";
   static const String initial = "/";
   static const String popularFood = "/popular-food";
   static const String recommendedFood = "/recommended-food";
@@ -26,6 +28,8 @@ class RouteHelper {
   static const String orderSuccess = "/order-successful";
 
   static String getSplashPage() => '$splashPage';
+
+  static String getWelcomePage() => '$welcomePage';
 
   static String getInitial() => '$initial';
 
@@ -58,7 +62,8 @@ class RouteHelper {
           return _pickAddress;
         }),
     GetPage(name: splashPage, page: () => SplashScreen()),
-    GetPage(name: initial, page: () => HomePage(), transition: Transition.fade),
+    GetPage(name: welcomePage, page: () => WelcomePage()),
+    GetPage(name: initial, page: () => HomePage(), transition: Transition.fadeIn),
     GetPage(
         name: signIn, page: () => SignInPage(), transition: Transition.fade),
     GetPage(
