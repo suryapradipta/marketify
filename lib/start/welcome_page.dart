@@ -5,8 +5,10 @@ import 'package:marketify/routes/route_helper.dart';
 
 
 import '../../utils/colors.dart';
+import '../controllers/auth_controller.dart';
 import '../controllers/popular_product_controller.dart';
 import '../controllers/recommended_product_controller.dart';
+import '../controllers/user_controller.dart';
 import 'widgets/app_large_text.dart';
 import 'widgets/app_text.dart';
 import 'widgets/responsive_button.dart';
@@ -26,6 +28,10 @@ class _WelcomePageState extends State<WelcomePage> {
   };
 
   Future<void> _loadResource() async {
+    bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
+    if (_userLoggedIn) {
+      await Get.find<UserController>().getUserInfo();
+    }
     await Get.find<PopularProductController>().getPopularProductList();
     await Get.find<RecommendedProductController>().getRecommendedProductList();
   }

@@ -12,6 +12,8 @@ import 'package:get/get.dart';
 
 import '../../routes/route_helper.dart';
 import '../../utils/colors.dart';
+import '../../widgets/icon_and_text_widget.dart';
+import '../../widgets/small_text.dart';
 import '../cart/cart_page.dart';
 
 class PopularFoodDetail extends StatelessWidget {
@@ -136,7 +138,53 @@ class PopularFoodDetail extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppColumn(text: product.name!),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BigText(text: product.name!, size: Dimensions.font26,),
+                        SizedBox(height: Dimensions.height10,), //\\ space between title and the bottom of title
+                        // comment section
+                        Row(
+                          children: [ //\\ children takes list of children //\\ can put children one by one, or using list of children
+                            Wrap( //\\ make the icon horizontally
+                              children: List.generate(product.stars!, (index) {return Icon(Icons.star, color: AppColors.mainColor, size: 15,);}), //\\ add icon stars
+                            ),
+                            SizedBox(width: 10,),
+                            SmallText(text: product.stars.toString()),
+
+                            SizedBox(width: 5,),
+                            SmallText(text: "stars"),
+
+                            SizedBox(width: 10,),
+
+                            SmallText(text: "34"),
+                            SizedBox(width: 5,),
+                            SmallText(text: "comments"),
+                          ],
+                        ),
+                        SizedBox(height: Dimensions.height10,),
+                        // time and distance
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //\\ give space between icon text in description box
+                          children: [
+                            IconAndTextWidget(icon: Icons.circle_sharp,
+                                text: "Fresh item",
+                                iconColor: AppColors.iconColor1),
+
+                            IconAndTextWidget(
+                                icon: Icons.location_on,
+                                text: product.location,
+                                iconColor: AppColors.mainColor),
+
+                            IconAndTextWidget(
+                                icon: Icons.favorite_outlined,
+                                text: product.selected_people.toString() + " selected people",
+
+                                iconColor: AppColors.iconColor2),
+                          ],
+                        ),
+                      ],
+                    ),
                     SizedBox(height: Dimensions.height20,),
                     BigText(text: "Introduce"),
                     SizedBox(height: Dimensions.height20,),

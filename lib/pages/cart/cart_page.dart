@@ -314,7 +314,9 @@ class CartPage extends StatelessWidget {
                     ))
                 : NoDataPage(
                     text: "Your shopping cart is empty!",
-                  );
+              imgPath: "assets/image/empty_shopping_cart.png",
+
+            );
           })
         ],
       ),

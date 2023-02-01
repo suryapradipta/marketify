@@ -276,7 +276,7 @@ class CartHistory extends StatelessWidget {
                     child: const Center(
                       child: NoDataPage(
                         text: "You didn't buy anything so far!",
-                        imgPath: "assets/image/empty_box.png",
+                        imgPath: "assets/image/box_empty.png",
                       ),
                     ),
                   );

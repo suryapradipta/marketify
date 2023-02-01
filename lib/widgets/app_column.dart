@@ -33,7 +33,7 @@ class AppColumn extends StatelessWidget {
             SmallText(text: "comments"),
           ],
         ),
-        SizedBox(height: Dimensions.height20,),
+        SizedBox(height: Dimensions.height10,),
         // time and distance
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween, //\\ give space between icon text in description box

@@ -42,6 +42,7 @@ class ProductModel {
   String? description;
   int? price;
   int? stars;
+  int? selected_people;
   String? img;
   String? location;
   String? createdAt;
@@ -54,6 +55,7 @@ class ProductModel {
       this.description,
       this.price,
       this.stars,
+      this.selected_people,
       this.img,
       this.location,
       this.createdAt,
@@ -66,6 +68,7 @@ class ProductModel {
     description = json['description'];
     price = json['price'];
     stars = json['stars'];
+    selected_people = json['selected_people'];
     img = json['img'];
     location = json['location'];
     createdAt = json['created_at'];
@@ -75,14 +78,14 @@ class ProductModel {
 
   Map<String, dynamic> toJson() {
     return {
-      "id":this.id,
-      "name":this.name,
-      "price":this.price,
-      "img":this.img,
-      "location":this.location,
-      "createdAt":this.createdAt,
-      "updatedAt":this.updatedAt,
-      "typeId":this.typeId,
+      "id": this.id,
+      "name": this.name,
+      "price": this.price,
+      "img": this.img,
+      "location": this.location,
+      "createdAt": this.createdAt,
+      "updatedAt": this.updatedAt,
+      "typeId": this.typeId,
     };
   }
 }

@@ -10,6 +10,7 @@ import 'package:marketify/widgets/icon_and_text_widget.dart';
 import 'package:marketify/widgets/small_text.dart';
 import 'package:get/get.dart';
 
+import '../../base/custom_loader.dart';
 import '../../controllers/auth_controller.dart';
 import '../../controllers/user_controller.dart';
 import '../../models/products_model.dart';
@@ -50,10 +51,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
-    if (_userLoggedIn) {
-      Get.find<UserController>().getUserInfo();
-    }
     return Column(
       children: [
         SizedBox(
@@ -61,7 +58,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         ),
 
         GetBuilder<UserController>(builder: (userController) {
-          return Container(
+          return userController.isLoading
+              ? Container(
             width: Dimensions.screenWidth,
             height: Dimensions.height20 * 5,
             margin: EdgeInsets.only(
@@ -129,7 +127,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 ],
               ),
             ),
-          );
+          ): CustomLoader();
         }),
         SizedBox(
           height: Dimensions.height30,
@@ -181,6 +179,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         SizedBox(
           height: Dimensions.height30,
         ),
+
+
+
         Container(
           // popular text
           margin: EdgeInsets.only(left: Dimensions.width30),
@@ -210,7 +211,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
 
-        // RECOMMENDED FOOD
+
+
+
+
+
 
         // LIST RECOMMENDED FOOD BODY SECTION
         GetBuilder<RecommendedProductController>(builder: (recommendedProduct) {
@@ -289,7 +294,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                         height: Dimensions.height10,
                                       ),
                                       SmallText(
-                                          text: "With chinese characteristics"),
+                                          text: "Safe for consumption."),
                                       SizedBox(
                                         height: Dimensions.height10,
                                       ),
@@ -298,24 +303,26 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                             MainAxisAlignment.spaceBetween,
                                         //\\ give space between icon text in description box
                                         children: [
+
+                                          IconAndTextWidget(icon: Icons.circle_sharp,
+                                              text: "Fresh",
+                                              iconColor: AppColors.iconColor1),
+
                                           IconAndTextWidget(
-                                              icon: Icons.price_check,
+                                              icon: Icons.price_change_sharp,
                                               text: recommendedProduct
                                                   .recommendedProductList[index]
                                                   .price!
                                                   .toString(),
-                                              iconColor: AppColors.iconColor1),
-                                          /*IconAndTextWidget(icon: Icons.price_change,
-                                          text: "Normal",
-                                          iconColor: AppColors.iconColor1),*/
-                                          IconAndTextWidget(
-                                              icon: Icons.location_on,
-                                              text: "1.7km",
                                               iconColor: AppColors.mainColor),
+
                                           IconAndTextWidget(
-                                              icon: Icons.access_time_rounded,
-                                              text: "32min",
-                                              iconColor: AppColors.iconColor2)
+                                              icon: Icons.favorite_outlined,
+                                              text: recommendedProduct
+                                                  .recommendedProductList[index].selected_people!.toString(),
+                                              iconColor: AppColors.iconColor2),
+
+
                                         ],
                                       )
                                     ],
@@ -432,12 +439,57 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 padding: EdgeInsets.only(
                     top: Dimensions.height15, left: 15, right: 15),
 
-                // DESCRIPTION CONTENT FROM AppColumn.dart
-                // ! means name is not empty
-                child: AppColumn(text: popularProduct.name!),
+                // DESCRIPTION CONTENT
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BigText(text: popularProduct.name!, size: Dimensions.font26,),
+                    SizedBox(height: Dimensions.height10,), //\\ space between title and the bottom of title
+                    // comment section
+                    Row(
+                      children: [ //\\ children takes list of children //\\ can put children one by one, or using list of children
+                        Wrap( //\\ make the icon horizontally
+                          children: List.generate(popularProduct.stars!, (index) {return Icon(Icons.star, color: AppColors.mainColor, size: 15,);}), //\\ add icon stars
+                        ),
+                        SizedBox(width: 10,),
+                        SmallText(text: popularProduct.stars.toString()),
+
+                        SizedBox(width: 5,),
+                        SmallText(text: "stars"),
+
+                        SizedBox(width: 10,),
+
+                        SmallText(text: "34"),
+                        SizedBox(width: 5,),
+                        SmallText(text: "comments"),
+                      ],
+                    ),
+                    SizedBox(height: Dimensions.height10,),
+                    // time and distance
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //\\ give space between icon text in description box
+                      children: [
+                        IconAndTextWidget(icon: Icons.circle_sharp,
+                            text: "Fresh",
+                            iconColor: AppColors.iconColor1),
+
+                        IconAndTextWidget(
+                            icon: Icons.price_change_sharp,
+                            text: popularProduct.price.toString(),
+                            iconColor: AppColors.mainColor),
+
+                        IconAndTextWidget(
+                            icon: Icons.favorite_outlined,
+                            text: popularProduct.selected_people.toString(),
+
+                            iconColor: AppColors.iconColor2),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
