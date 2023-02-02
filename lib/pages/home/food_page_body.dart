@@ -90,7 +90,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         CircleAvatar(
                           radius: 40,
                           backgroundImage:
-                              AssetImage("assets/image/profile1.png"),
+                              AssetImage("assets/image/profile_one.png"),
+                          backgroundColor: AppColors.mainColor,
                         ),
                         SizedBox(
                           width: 10,

@@ -24,7 +24,7 @@ class AccountPage extends StatelessWidget {
       Get.find<UserController>().getUserInfo();
     }
     return Scaffold(
-      // APP BAR HEADER SECTION
+      // APP BAR START =========================================================
       appBar: AppBar(
         backgroundColor: AppColors.mainColor,
         title: BigText(
@@ -33,82 +33,97 @@ class AccountPage extends StatelessWidget {
           color: Colors.white,
         ),
       ),
+      // APP BAR END =========================================================
 
-      // ICON IMAGE SECTION
       body: GetBuilder<UserController>(builder: (userController) {
         return _userLoggedIn
             ? (userController.isLoading
                 ? Container(
-                    // supaya icon di tengah
+                    // make icon centered
                     width: double.maxFinite,
                     margin: EdgeInsets.only(top: Dimensions.height20),
                     child: Column(
                       children: [
-                        // PROFILE ICON
-                        AppIcon(
-                          icon: Icons.person_rounded,
-                          backgroundColor: AppColors.mainColor,
-                          iconColor: Colors.white,
-                          iconSize: Dimensions.height45 + Dimensions.height30,
-                          size: Dimensions.height15 * 10,
+                        // ICON PROFILE START ==================================
+                        Container(
+                          width: double.maxFinite,
+                          height: Dimensions.height20 * 8,
+                          margin: EdgeInsets.only(
+                              left: Dimensions.width20,
+                              right: Dimensions.width20),
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius20),
+                            image: DecorationImage(
+                              image: AssetImage("assets/image/profile_one.png"),
+                            ),
+                          ),
                         ),
+                        // ICON PROFILE END ==================================
+
                         SizedBox(
                           height: Dimensions.height30,
                         ),
+
                         Expanded(
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                // NAME ICON
+                                // NAME START ==================================
                                 AccountWidget(
-                                    appIcon: AppIcon(
-                                      icon: Icons.person_rounded,
-                                      backgroundColor: AppColors.mainColor,
-                                      iconColor: Colors.white,
-                                      iconSize: Dimensions.height10 * 5 / 2,
-                                      size: Dimensions.height10 * 5,
-                                    ),
-                                    bigText: BigText(
-                                        text: userController.userModel!.name)),
+                                  appIcon: AppIcon(
+                                    icon: Icons.person_rounded,
+                                    backgroundColor: Colors.white,
+                                    iconColor: AppColors.mainColor,
+                                    iconSize: Dimensions.height10 * 5 / 2,
+                                    size: Dimensions.height10 * 5,
+                                  ),
+                                  bigText: BigText(
+                                      text: userController.userModel!.name),
+                                ),
+                                // NAME END ==================================
 
                                 SizedBox(
-                                  height: Dimensions.height10 / 2,
+                                  height: Dimensions.height20,
                                 ),
 
-                                // PHONE
+                                // PHONE START =================================
                                 AccountWidget(
-                                    appIcon: AppIcon(
-                                      icon: Icons.phone_iphone,
-                                      backgroundColor: AppColors.mainColor,
-                                      iconColor: Colors.white,
-                                      iconSize: Dimensions.height10 * 5 / 2,
-                                      size: Dimensions.height10 * 5,
-                                    ),
-                                    bigText: BigText(
-                                        text: userController.userModel!.phone)),
+                                  appIcon: AppIcon(
+                                    icon: Icons.phone_iphone,
+                                    backgroundColor: Colors.white,
+                                    iconColor: AppColors.mainColor,
+                                    iconSize: Dimensions.height10 * 5 / 2,
+                                    size: Dimensions.height10 * 5,
+                                  ),
+                                  bigText: BigText(
+                                      text: userController.userModel!.phone),
+                                ),
+                                // PHONE END =================================
 
                                 SizedBox(
-                                  height: Dimensions.height10 / 2,
+                                  height: Dimensions.height20,
                                 ),
 
-                                //EMAIL
+                                //EMAIL START =================================
                                 AccountWidget(
                                   appIcon: AppIcon(
                                     icon: Icons.email_rounded,
-                                    backgroundColor: AppColors.mainColor,
-                                    iconColor: Colors.white,
+                                    backgroundColor: Colors.white,
+                                    iconColor: AppColors.mainColor,
                                     iconSize: Dimensions.height10 * 5 / 2,
                                     size: Dimensions.height10 * 5,
                                   ),
                                   bigText: BigText(
                                       text: userController.userModel!.email),
                                 ),
+                                //EMAIL END =================================
 
                                 SizedBox(
-                                  height: Dimensions.height10 / 2,
+                                  height: Dimensions.height20,
                                 ),
 
-                                // ADDRESS
+                                // ADDRESS START ===============================
                                 GetBuilder<LocationController>(
                                     builder: (locationController) {
                                   if (_userLoggedIn &&
@@ -121,8 +136,8 @@ class AccountPage extends StatelessWidget {
                                       child: AccountWidget(
                                         appIcon: AppIcon(
                                           icon: Icons.location_pin,
-                                          backgroundColor: AppColors.mainColor,
-                                          iconColor: Colors.white,
+                                          backgroundColor: Colors.white,
+                                          iconColor: AppColors.mainColor,
                                           iconSize: Dimensions.height10 * 5 / 2,
                                           size: Dimensions.height10 * 5,
                                         ),
@@ -139,9 +154,8 @@ class AccountPage extends StatelessWidget {
                                       child: AccountWidget(
                                           appIcon: AppIcon(
                                             icon: Icons.location_pin,
-                                            backgroundColor:
-                                                AppColors.mainColor,
-                                            iconColor: Colors.white,
+                                            backgroundColor: Colors.white,
+                                            iconColor: AppColors.mainColor,
                                             iconSize:
                                                 Dimensions.height10 * 5 / 2,
                                             size: Dimensions.height10 * 5,
@@ -151,46 +165,47 @@ class AccountPage extends StatelessWidget {
                                     );
                                   }
                                 }),
+                                // ADDRESS END ===============================
 
                                 SizedBox(
-                                  height: Dimensions.height10 / 2,
+                                  height: Dimensions.height20,
                                 ),
-                                //Message
+
+                                //MESSAGE START ================================
                                 AccountWidget(
                                   appIcon: AppIcon(
                                     icon: Icons.message,
-                                    backgroundColor: AppColors.mainColor,
-                                    iconColor: Colors.white,
+                                    backgroundColor: Colors.white,
+                                    iconColor: AppColors.mainColor,
                                     iconSize: Dimensions.height10 * 5 / 2,
                                     size: Dimensions.height10 * 5,
                                   ),
                                   bigText: BigText(text: "Message"),
                                 ),
+                                //MESSAGE END ================================
 
                                 SizedBox(
-                                  height: Dimensions.height10 / 2,
+                                  height: Dimensions.height20,
                                 ),
 
-                                SizedBox(
-                                  height: Dimensions.height30,
-                                ),
-
-                                // MESSAGE
+                                // CUSTOMER SERVICE START ======================
                                 AccountWidget(
-                                    appIcon: AppIcon(
-                                      icon: Icons.help_outline,
-                                      backgroundColor: Colors.redAccent,
-                                      iconColor: Colors.white,
-                                      iconSize: Dimensions.height10 * 5 / 2,
-                                      size: Dimensions.height10 * 5,
-                                    ),
-                                    bigText:
-                                        BigText(text: "Customer Services")),
+                                  appIcon: AppIcon(
+                                    icon: Icons.help_outline,
+                                    backgroundColor: Colors.white,
+                                    iconColor: AppColors.iconColor1,
+                                    iconSize: Dimensions.height10 * 5 / 2,
+                                    size: Dimensions.height10 * 5,
+                                  ),
+                                  bigText: BigText(text: "Customer Services"),
+                                ),
+                                // CUSTOMER SERVICE END ======================
+
                                 SizedBox(
-                                  height: Dimensions.height10 / 2,
+                                  height: Dimensions.height20,
                                 ),
 
-                                // SIGN OUT START
+                                // SIGN OUT START =============================
                                 GestureDetector(
                                   onTap: () {
                                     // clear all information while signed out
@@ -207,23 +222,26 @@ class AccountPage extends StatelessWidget {
 
                                       Get.offNamed(RouteHelper.getSignInPage());
                                     } else {
-                                      "you log out";
+                                      print("you log out");
                                     }
                                   },
                                   child: AccountWidget(
-                                      appIcon: AppIcon(
-                                        icon: Icons.logout,
-                                        backgroundColor: Colors.redAccent,
-                                        iconColor: Colors.white,
-                                        iconSize: Dimensions.height10 * 5 / 2,
-                                        size: Dimensions.height10 * 5,
-                                      ),
-                                      bigText: BigText(text: "Sign Out")),
+                                    appIcon: AppIcon(
+                                      icon: Icons.logout,
+                                      backgroundColor: Colors.white,
+                                      iconColor: Colors.redAccent,
+                                      iconSize: Dimensions.height10 * 5 / 2,
+                                      size: Dimensions.height10 * 5,
+                                    ),
+                                    bigText: BigText(text: "Sign Out"),
+                                  ),
                                 ),
+                                // SIGN OUT END =============================
+
+
                                 SizedBox(
                                   height: Dimensions.height10,
                                 ),
-                                // SIGN OUT END
                               ],
                             ),
                           ),
@@ -250,13 +268,13 @@ class AccountPage extends StatelessWidget {
                         borderRadius:
                             BorderRadius.circular(Dimensions.radius20),
                         image: DecorationImage(
-                          // fit: BoxFit.cover,
-                          image:
-                              AssetImage("assets/image/signin.png"),
+                          image: AssetImage("assets/image/signin.png"),
                         ),
                       ),
                     ),
-                    SizedBox(height: Dimensions.height30,),
+                    SizedBox(
+                      height: Dimensions.height30,
+                    ),
                     Container(
                       width: double.maxFinite,
                       height: Dimensions.height20 * 5,

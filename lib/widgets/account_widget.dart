@@ -13,8 +13,10 @@ class AccountWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(left: Dimensions.height20, right: Dimensions.height20),
+
       padding: EdgeInsets.only(
-          left: Dimensions.width20,
+          left: Dimensions.width10,
           top: Dimensions.width10,
           bottom: Dimensions.width10),
       child: Row(
@@ -26,10 +28,13 @@ class AccountWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(Dimensions.radius20 / 4),
+        borderRadius: BorderRadius.circular(Dimensions.radius15),
+
           boxShadow: [
           BoxShadow(
-            color: Colors.grey[200]!, blurRadius: 5, spreadRadius: 1,
+            color: Colors.grey[200]!,
+            blurRadius: 3,
+            spreadRadius: 1,
           ),
         ]
       ),
