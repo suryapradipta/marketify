@@ -152,7 +152,6 @@ class AccountPage extends StatelessWidget {
                                   }
                                 }),
 
-
                                 SizedBox(
                                   height: Dimensions.height10 / 2,
                                 ),
@@ -165,8 +164,7 @@ class AccountPage extends StatelessWidget {
                                     iconSize: Dimensions.height10 * 5 / 2,
                                     size: Dimensions.height10 * 5,
                                   ),
-                                  bigText: BigText(
-                                      text: "Message"),
+                                  bigText: BigText(text: "Message"),
                                 ),
 
                                 SizedBox(
@@ -186,7 +184,8 @@ class AccountPage extends StatelessWidget {
                                       iconSize: Dimensions.height10 * 5 / 2,
                                       size: Dimensions.height10 * 5,
                                     ),
-                                    bigText: BigText(text: "Customer Services")),
+                                    bigText:
+                                        BigText(text: "Customer Services")),
                                 SizedBox(
                                   height: Dimensions.height10 / 2,
                                 ),
@@ -243,18 +242,21 @@ class AccountPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                        width: double.maxFinite,
-                        height: Dimensions.height20 * 8,
-                        margin: EdgeInsets.only(
-                            left: Dimensions.width20,
-                            right: Dimensions.width20),
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.radius20),
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                    "assets/image/signintocontinue.png")))),
+                      width: double.maxFinite,
+                      height: Dimensions.height20 * 8,
+                      margin: EdgeInsets.only(
+                          left: Dimensions.width20, right: Dimensions.width20),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
+                        image: DecorationImage(
+                          // fit: BoxFit.cover,
+                          image:
+                              AssetImage("assets/image/signin.png"),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: Dimensions.height30,),
                     Container(
                       width: double.maxFinite,
                       height: Dimensions.height20 * 5,
