@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>The app needs location permission</string>
+    <string>This app needs access to location to manage coverage of market</string>
     <key>io.flutter.embedded_views_preview</key>
     <string>YES</string>
     <key>NSAppTransportSecurity</key>
@@ -11,10 +11,6 @@
             <key>NSAllowsArbitraryLoads</key>
             <true/>
         </dict>
-    <key>NSCameraUsageDescription</key>
-    <string>This app requires access to the camera</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs access to location to manage coverage of market</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
