@@ -15,6 +15,7 @@ import '../../controllers/auth_controller.dart';
 import '../../controllers/user_controller.dart';
 import '../../models/products_model.dart';
 import '../../routes/route_helper.dart';
+import '../../start/widgets/app_text.dart';
 import '../../utils/app_constants.dart';
 
 class FoodPageBody extends StatefulWidget {
@@ -31,6 +32,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   var _currPageValue = 0.0;
   double _scaleFactor = 0.8;
   double _height = Dimensions.pageViewContainer;
+
+  var images ={
+    "zerowaste.png":"Balloning",
+    "f.png":"Hiking",
+    "english.png":"Kayaking",
+    "efood.png":"Snorkling"
+  };
 
   @override
   void initState() {
@@ -174,6 +182,88 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ),
           );
         }),
+
+
+
+
+
+        SizedBox(height: Dimensions.height30,),
+
+        Container( // popular text
+          margin: EdgeInsets.only(left: Dimensions.width30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end, // text will be start from bottom line
+            children: [
+              BigText(text: "Discover"),
+              SizedBox(width: Dimensions.width10,),
+              Container(
+                margin: const EdgeInsets.only(bottom: 3), // up the dot
+                child: BigText(text: ".", color: Colors.black26,),
+              ),
+              SizedBox(width: Dimensions.width10,),
+              Container(
+                margin: const EdgeInsets.only(bottom: 2), // up the text
+                child: SmallText(text: "Products offered"),
+              )
+            ],
+          ),
+        ),
+
+        SizedBox(height: Dimensions.height30,),
+
+        Container(
+          height: 120,
+          width: double.maxFinite,
+          margin: const EdgeInsets.only(left: 20),
+          child: ListView.builder(
+              itemCount: 4,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, index) {
+                return Container(
+                  margin: const EdgeInsets.only(right: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        // margin: const EdgeInsets.only(right: 50),
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            image: DecorationImage(
+                                image: AssetImage("assets/image/"+images.keys.elementAt(index)),
+                                fit: BoxFit.cover)),
+                      ),
+                      SizedBox(height: 10,),
+                      Container(
+                        child: AppText(
+                          text: images.values.elementAt(index),
+                          color: AppColors.textColor,
+
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }),
+        ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // LIST RECOMMENDED TITLE SECTION
         SizedBox(
