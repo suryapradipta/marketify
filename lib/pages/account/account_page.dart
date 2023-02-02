@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:marketify/base/custom_app_bar.dart';
 import 'package:marketify/base/custom_loader.dart';
 import 'package:marketify/controllers/auth_controller.dart';
 import 'package:marketify/routes/route_helper.dart';
@@ -25,14 +26,7 @@ class AccountPage extends StatelessWidget {
     }
     return Scaffold(
       // APP BAR START =========================================================
-      appBar: AppBar(
-        backgroundColor: AppColors.mainColor,
-        title: BigText(
-          text: "Profile",
-          size: 24,
-          color: Colors.white,
-        ),
-      ),
+      appBar: CustomAppBar(title: "Profile", backButtonExist: false,),
       // APP BAR END =========================================================
 
       body: GetBuilder<UserController>(builder: (userController) {
@@ -222,7 +216,7 @@ class AccountPage extends StatelessWidget {
 
                                       Get.offNamed(RouteHelper.getSignInPage());
                                     } else {
-                                      print("you log out");
+                                      "you log out";
                                     }
                                   },
                                   child: AccountWidget(

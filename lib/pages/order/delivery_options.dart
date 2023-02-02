@@ -42,7 +42,7 @@ class DeliveryOptions extends StatelessWidget {
             width: Dimensions.width10 / 2,
           ),
           Text(
-            '(${(value == 'take away' || isFree) ? 'free' : '\$${amount / 10}'})',
+            '(${(value == 'picked up' || isFree) ? 'free' : '\$${amount / 10}'})',
             style: robotoMedium,
           )
         ],

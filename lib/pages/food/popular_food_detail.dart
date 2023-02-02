@@ -19,13 +19,16 @@ import '../cart/cart_page.dart';
 class PopularFoodDetail extends StatelessWidget {
   final int pageId;
   final String page;
-  const PopularFoodDetail({Key? key, required this.pageId, required this.page}) : super(key: key);
+
+  const PopularFoodDetail({Key? key, required this.pageId, required this.page})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    var product = Get.find<PopularProductController>().popularProductList[pageId];
-    Get.find<PopularProductController>().initProduct(product,Get.find<CartController>());
+    var product =
+        Get.find<PopularProductController>().popularProductList[pageId];
+    Get.find<PopularProductController>()
+        .initProduct(product, Get.find<CartController>());
 
     // print("page is id "+pageId.toString());
     // print("product name is "+ product.name.toString());
@@ -33,7 +36,6 @@ class PopularFoodDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-
           // BACKGROUND IMAGE
           Positioned(
               left: 0,
@@ -42,19 +44,16 @@ class PopularFoodDetail extends StatelessWidget {
                 width: double.maxFinite,
                 height: Dimensions.popularFoodImgSize,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                      image: NetworkImage(
-                        AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!
-                      )
-                  )
-                ),
-          )),
-
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(AppConstants.BASE_URL +
+                            AppConstants.UPLOAD_URL +
+                            product.img!))),
+              )),
 
           // ICON WIDGETS ON THE TOP
           Positioned(
-            top: Dimensions.height45,
+              top: Dimensions.height45,
               left: Dimensions.width20,
               right: Dimensions.width20,
               child: Row(
@@ -62,186 +61,223 @@ class PopularFoodDetail extends StatelessWidget {
                 children: [
                   // "GestureDetector" supaya bisa dipencet
                   GestureDetector(
-                    onTap:() {
-                      // Get.to untuk beralih halaman
-                      if(page=="cartpage"){
-                        Get.toNamed(RouteHelper.getCartPage());
-                      }else{
-                        Get.toNamed(RouteHelper.getInitial());
-                      }
-                    },
-                      child:
-                      AppIcon(icon: Icons.arrow_back_ios)
-                  ),
-
+                      onTap: () {
+                        // Get.to untuk beralih halaman
+                        if (page == "cartpage") {
+                          Get.toNamed(RouteHelper.getCartPage());
+                        } else {
+                          Get.toNamed(RouteHelper.getInitial());
+                        }
+                      },
+                      child: AppIcon(icon: Icons.arrow_back_ios)),
 
                   // CART ICON
-                  GetBuilder<PopularProductController>(builder: (controller){
+                  GetBuilder<PopularProductController>(builder: (controller) {
                     return GestureDetector(
-                      onTap: (){
-                        if(controller.totalItems>=0)
+                      onTap: () {
+                        if (controller.totalItems >= 0)
                           Get.toNamed(RouteHelper.getCartPage());
                       },
                       child: Stack(
                         children: [
                           AppIcon(icon: Icons.shopping_cart_outlined),
-                          controller.totalItems>=1?
-                          Positioned(
-                            right: 0, top: 0,
-
-                              child: AppIcon(icon: Icons.circle,
-                                size: 20,
-                                iconColor: Colors.transparent,
-                                backgroundColor: AppColors.mainColor,),
-                          ):
-                          Container(),
-
+                          controller.totalItems >= 1
+                              ? Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: AppIcon(
+                                    icon: Icons.circle,
+                                    size: 20,
+                                    iconColor: Colors.transparent,
+                                    backgroundColor: AppColors.mainColor,
+                                  ),
+                                )
+                              : Container(),
 
                           // TEXT IN CART ICON
-                          Get.find<PopularProductController>().totalItems>=1?
-                          Positioned(
-                            right: 3, top: 3,
-                            child: BigText(
-                              text: Get.find<PopularProductController>().totalItems.toString(),
-                              size: 12,
-                              color: Colors.white,
-
-                            ),
-                          ):
-                          Container()
+                          Get.find<PopularProductController>().totalItems >= 1
+                              ? Positioned(
+                                  right: 3,
+                                  top: 3,
+                                  child: BigText(
+                                    text: Get.find<PopularProductController>()
+                                        .totalItems
+                                        .toString(),
+                                    size: 12,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Container()
                         ],
                       ),
                     );
                   })
-
                 ],
-          )),
-
-
+              )),
 
           // INTRODUCTION DESCRIPTION TO FOOD
           Positioned(
-            left: 0,
+              left: 0,
               right: 0,
               bottom: 0,
-              top: Dimensions.popularFoodImgSize-20,
+              top: Dimensions.popularFoodImgSize - 20,
               child: Container(
-
-                padding: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20, top: Dimensions.height20),
+                padding: EdgeInsets.only(
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                    top: Dimensions.height20),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(Dimensions.radius20),
-                    topLeft: Radius.circular(Dimensions.radius20)
-                  ),
-                  color: Colors.white
-                ),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(Dimensions.radius20),
+                        topLeft: Radius.circular(Dimensions.radius20)),
+                    color: Colors.white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        BigText(text: product.name!, size: Dimensions.font26,),
-                        SizedBox(height: Dimensions.height10,), //\\ space between title and the bottom of title
+                        BigText(
+                          text: product.name!,
+                          size: Dimensions.font26,
+                        ),
+                        SizedBox(
+                          height: Dimensions.height10,
+                        ),
+                        //\\ space between title and the bottom of title
                         // comment section
                         Row(
-                          children: [ //\\ children takes list of children //\\ can put children one by one, or using list of children
-                            Wrap( //\\ make the icon horizontally
-                              children: List.generate(product.stars!, (index) {return Icon(Icons.star, color: AppColors.mainColor, size: 15,);}), //\\ add icon stars
+                          children: [
+                            //\\ children takes list of children //\\ can put children one by one, or using list of children
+                            Wrap(
+                              //\\ make the icon horizontally
+                              children: List.generate(product.stars!, (index) {
+                                return Icon(
+                                  Icons.star,
+                                  color: AppColors.mainColor,
+                                  size: 15,
+                                );
+                              }), //\\ add icon stars
                             ),
-                            SizedBox(width: 10,),
+                            SizedBox(
+                              width: 10,
+                            ),
                             SmallText(text: product.stars.toString()),
 
-                            SizedBox(width: 5,),
+                            SizedBox(
+                              width: 5,
+                            ),
                             SmallText(text: "stars"),
 
-                            SizedBox(width: 10,),
+                            SizedBox(
+                              width: 10,
+                            ),
 
                             SmallText(text: "34"),
-                            SizedBox(width: 5,),
+                            SizedBox(
+                              width: 5,
+                            ),
                             SmallText(text: "comments"),
                           ],
                         ),
-                        SizedBox(height: Dimensions.height10,),
+                        SizedBox(
+                          height: Dimensions.height10,
+                        ),
                         // time and distance
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //\\ give space between icon text in description box
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //\\ give space between icon text in description box
                           children: [
-                            IconAndTextWidget(icon: Icons.circle_sharp,
+                            IconAndTextWidget(
+                                icon: Icons.circle_sharp,
                                 text: "Fresh item",
                                 iconColor: AppColors.iconColor1),
-
                             IconAndTextWidget(
                                 icon: Icons.location_on,
                                 text: product.location,
                                 iconColor: AppColors.mainColor),
-
                             IconAndTextWidget(
                                 icon: Icons.favorite_outlined,
-                                text: product.selected_people.toString() + " selected people",
-
+                                text: product.selected_people.toString() +
+                                    " selected people",
                                 iconColor: AppColors.iconColor2),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(height: Dimensions.height20,),
+                    SizedBox(
+                      height: Dimensions.height20,
+                    ),
                     BigText(text: "Introduce"),
-                    SizedBox(height: Dimensions.height20,),
+                    SizedBox(
+                      height: Dimensions.height20,
+                    ),
                     // singgle child work together expanded widget to make it scrollable
-                    Expanded(child: SingleChildScrollView(child: ExpandableTextWidget(text: product.description!)))
+                    Expanded(
+                        child: SingleChildScrollView(
+                            child: ExpandableTextWidget(
+                                text: product.description!)))
                   ],
                 ),
-          ))
+              ))
         ],
       ),
 
-
-
-
-
-
       // ADD TO CART SECTION
-      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProduct){
+      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProduct) {
         return Container(
           height: Dimensions.bottomHeightBar,
-          padding: EdgeInsets.only(top: Dimensions.height30, bottom: Dimensions.height30, left: Dimensions.width20, right: Dimensions.width20),
+          padding: EdgeInsets.only(
+              top: Dimensions.height30,
+              bottom: Dimensions.height30,
+              left: Dimensions.width20,
+              right: Dimensions.width20),
           decoration: BoxDecoration(
               color: AppColors.buttonBackgroundColor,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(Dimensions.radius20*2),
-                topRight:  Radius.circular(Dimensions.radius20*2),
-              )
-          ),
+                topLeft: Radius.circular(Dimensions.radius20 * 2),
+                topRight: Radius.circular(Dimensions.radius20 * 2),
+              )),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.only(top: Dimensions.height20,bottom: Dimensions.height20, left: Dimensions.width20, right: Dimensions.width20),
+                padding: EdgeInsets.only(
+                    top: Dimensions.height20,
+                    bottom: Dimensions.height20,
+                    left: Dimensions.width20,
+                    right: Dimensions.width20),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
-                    color: Colors.white
-                ),
+                    color: Colors.white),
                 child: Row(
                   children: [
-
                     // ICON ADD AND REMOVE FOOTBAR SECTION
                     GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           popularProduct.setQuantity(false);
                         },
-                        child: Icon(Icons.remove, color: AppColors.signColor,)),
-                    SizedBox(width: Dimensions.width10/2,),
-
+                        child: Icon(
+                          Icons.remove,
+                          color: AppColors.signColor,
+                        )),
+                    SizedBox(
+                      width: Dimensions.width10 / 2,
+                    ),
 
                     // QUANTITY SECTION
                     BigText(text: popularProduct.inCartItems.toString()),
-                    SizedBox(width: Dimensions.width10/2,),
+                    SizedBox(
+                      width: Dimensions.width10 / 2,
+                    ),
                     GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           popularProduct.setQuantity(true);
                         },
-                        child: Icon(Icons.add, color: AppColors.signColor,))
+                        child: Icon(
+                          Icons.add,
+                          color: AppColors.signColor,
+                        ))
                   ],
                 ),
               ),
@@ -252,12 +288,18 @@ class PopularFoodDetail extends StatelessWidget {
                   popularProduct.addItem(product);
                 },
                 child: Container(
-                  padding: EdgeInsets.only(top: Dimensions.height20,bottom: Dimensions.height20, left: Dimensions.width20, right: Dimensions.width20),
-                  child: BigText(text: "\$ ${product.price!} | Add to cart", color: Colors.white,),
+                  padding: EdgeInsets.only(
+                      top: Dimensions.height20,
+                      bottom: Dimensions.height20,
+                      left: Dimensions.width20,
+                      right: Dimensions.width20),
+                  child: BigText(
+                    text: "\$ ${product.price!} | Add to cart",
+                    color: Colors.white,
+                  ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius20),
-                      color: AppColors.mainColor
-                  ),
+                      color: AppColors.mainColor),
                 ),
               )
             ],

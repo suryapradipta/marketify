@@ -381,7 +381,7 @@ class CartPage extends StatelessWidget {
                                                             title:
                                                                 'Cash on Delivery',
                                                             subTitle:
-                                                                'You pay after getting your products',
+                                                                'Get What You Want Now - Pay Later With Cash on Delivery',
                                                             index: 0),
                                                         SizedBox(
                                                           height: Dimensions
@@ -393,7 +393,7 @@ class CartPage extends StatelessWidget {
                                                             title:
                                                                 'Digital Payment',
                                                             subTitle:
-                                                                'Safer and Faster Way of Payment',
+                                                                'Secure, Convenient Digital Payments - Make Transactions Easier & Safer!',
                                                             index: 1),
                                                         SizedBox(
                                                           height: Dimensions
@@ -424,8 +424,8 @@ class CartPage extends StatelessWidget {
                                                               2,
                                                         ),
                                                         DeliveryOptions(
-                                                            value: "take away",
-                                                            title: "take away",
+                                                            value: "picked up",
+                                                            title: "picked up",
                                                             amount: 10.0,
                                                             isFree: true),
                                                         SizedBox(
@@ -435,6 +435,10 @@ class CartPage extends StatelessWidget {
                                                         Text(
                                                           "Additional Notes",
                                                           style: robotoMedium,
+                                                        ),
+                                                        SizedBox(
+                                                          height: Dimensions
+                                                              .height20,
                                                         ),
                                                         AppTextField(
                                                           maxLines: true,
