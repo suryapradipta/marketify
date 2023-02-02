@@ -216,7 +216,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: 2), // up the text
-                child: SmallText(text: "Our offered"),
+                child: SmallText(text: "Product Type Offered"),
               )
             ],
           ),
@@ -284,13 +284,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
 
         SizedBox(
-          height: Dimensions.height30,
+          height: Dimensions.height10,
         ),
 
-
-
+        // BADGE START ========================================================
         Container(
-          height: 180,
+          height: Dimensions.width20 * 9,
           width: Dimensions.screenWidth,
           margin: EdgeInsets.only(
               left: Dimensions.width30,
@@ -300,67 +299,63 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 120,
+                height: Dimensions.width20 * 6,
+                margin: EdgeInsets.only(top: Dimensions.height30),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(image: AssetImage(
-                    "assets/image/card.jpg"
-                  ),
-                  fit: BoxFit.fill),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 10,
-                      offset: Offset(-1, -5),
-                      color: AppColors.mainColor.withOpacity(0.3)
-                    )
-                  ]
-
-                ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 10,
+                          offset: Offset(-1, -5),
+                          color: AppColors.mainColor.withOpacity(0.3))
+                    ]),
               ),
               Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-
-                margin: EdgeInsets.only(right: 180, bottom: 60),
+                margin: EdgeInsets.only(
+                    right: Dimensions.width30 * 6, bottom: Dimensions.height30),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: AssetImage("assets/image/empty_shopping_cart.png"),
-                        ),
+                  image: DecorationImage(
+                    image: AssetImage("assets/image/figure_one.png"),
+                  ),
                 ),
               ),
               Container(
                 width: double.maxFinite,
-                height: 100,
-                margin: EdgeInsets.only(left: 150, top: 50),
+                height: Dimensions.width20 * 5,
+                margin: EdgeInsets.only(
+                    left: Dimensions.width10 * 13,
+                    top: Dimensions.height10 * 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Recommendation Food",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.mainColor
-                    ),),
-                    SizedBox(height: Dimensions.height10,),
-                    RichText(text: TextSpan(text: "keep it up \n",
-                    style: TextStyle(
-                      color: AppColors.iconColor2,
-                      fontSize: 16
+                    Text(
+                      "Looking for Fresh Groceries?",
+                      style: TextStyle(
+                          fontSize: Dimensions.font20,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.mainColor),
                     ),
-                      children: [
-                        TextSpan(text: "stick to your plan"),
-                      ]
+                    SizedBox(
+                      height: Dimensions.height10,
                     ),
+                    RichText(
+                      text: TextSpan(
+                          text: "You can get our recommendation \n",
+                          style: TextStyle(
+                              color: AppColors.iconColor2,
+                              fontSize: Dimensions.font12),
+                          children: [
+                            TextSpan(text: "to get fresh groceries"),
+                          ]),
                     ),
                   ],
                 ),
               ),
-
             ],
           ),
         ),
-
+        // BADGE END ========================================================
 
 
 
