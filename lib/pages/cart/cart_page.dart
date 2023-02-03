@@ -555,7 +555,9 @@ class CartPage extends StatelessWidget {
                                 },
                                 child: CommonTextButton(
                                   text: "Check Out",
-                                ))
+
+                                ),
+                            )
                           ],
                         ),
                       ],

@@ -20,15 +20,12 @@ class PopularFoodDetail extends StatelessWidget {
   final int pageId;
   final String page;
 
-  const PopularFoodDetail({Key? key, required this.pageId, required this.page})
-      : super(key: key);
+  const PopularFoodDetail({Key? key, required this.pageId, required this.page}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var product =
-        Get.find<PopularProductController>().popularProductList[pageId];
-    Get.find<PopularProductController>()
-        .initProduct(product, Get.find<CartController>());
+    var product = Get.find<PopularProductController>().popularProductList[pageId];
+    Get.find<PopularProductController>().initProduct(product, Get.find<CartController>());
 
     // print("page is id "+pageId.toString());
     // print("product name is "+ product.name.toString());
@@ -97,7 +94,7 @@ class PopularFoodDetail extends StatelessWidget {
                           // TEXT IN CART ICON
                           Get.find<PopularProductController>().totalItems >= 1
                               ? Positioned(
-                                  right: 3,
+                                  right: 6,
                                   top: 3,
                                   child: BigText(
                                     text: Get.find<PopularProductController>()
@@ -224,7 +221,8 @@ class PopularFoodDetail extends StatelessWidget {
       ),
 
       // ADD TO CART SECTION
-      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProduct) {
+      bottomNavigationBar:
+          GetBuilder<PopularProductController>(builder: (popularProduct) {
         return Container(
           height: Dimensions.bottomHeightBar,
           padding: EdgeInsets.only(
@@ -248,6 +246,13 @@ class PopularFoodDetail extends StatelessWidget {
                     left: Dimensions.width20,
                     right: Dimensions.width20),
                 decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(0,5),
+                        blurRadius: 10,
+                        color: Colors.grey[200]!
+                      )
+                    ],
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
                     color: Colors.white),
                 child: Row(
@@ -298,6 +303,13 @@ class PopularFoodDetail extends StatelessWidget {
                     color: Colors.white,
                   ),
                   decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0,5),
+                          blurRadius: 10,
+                          color: AppColors.mainColor.withOpacity(0.3),
+                        )
+                      ],
                       borderRadius: BorderRadius.circular(Dimensions.radius20),
                       color: AppColors.mainColor),
                 ),
