@@ -9,6 +9,7 @@ import 'package:marketify/utils/colors.dart';
 import 'package:marketify/utils/dimensions.dart';
 import 'package:marketify/widgets/app_icon.dart';
 import 'package:marketify/widgets/big_text.dart';
+import 'package:marketify/widgets/small_text.dart';
 
 import '../../controllers/cart_controller.dart';
 import '../../controllers/location_controller.dart';
@@ -255,25 +256,26 @@ class AccountPage extends StatelessWidget {
                   children: [
                     Container(
 
-                      height: MediaQuery.of(context).size.height * 0.22,
+                      height: MediaQuery.of(context).size.height * 0.44,
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.only(
-                          left: Dimensions.width20, right: Dimensions.width20),
+                          left: Dimensions.width20,
+                          right: Dimensions.width20),
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.circular(Dimensions.radius20),
                         image: DecorationImage(
-                          scale: 2,
-                          image: AssetImage("assets/image/signin_one.png"),
+                          image: AssetImage("assets/image/hello.png"),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: Dimensions.height30,
-                    ),
+
+                    SmallText(text: "Come be a part of our mission", size: Dimensions.font20,),
+                    SizedBox(height: Dimensions.height20),
+
                     Container(
                       width: double.maxFinite,
-                      height: Dimensions.height20 * 5,
+                      height: Dimensions.height20 * 4,
                       margin: EdgeInsets.only(
                           left: Dimensions.width20, right: Dimensions.width20),
                       decoration: BoxDecoration(

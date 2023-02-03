@@ -29,9 +29,9 @@ class OrderSuccessPage extends StatelessWidget {
             children: [
               Icon(
                 status == 1
-                    ? Icons.check_circle_outline
+                    ? Icons.check_circle
                     : Icons.warning_amber_outlined,
-                size: 100,
+                size: 150,
                 color: AppColors.mainColor,
               ),
               SizedBox(
@@ -39,9 +39,9 @@ class OrderSuccessPage extends StatelessWidget {
               ),
               Text(
                 status == 1
-                    ? 'You placed the order successfully'
-                    : 'Your order failed',
-                style: TextStyle(fontSize: Dimensions.font20),
+                    ? 'Thank you!'
+                    : 'Sorry',
+                style: TextStyle(fontSize: Dimensions.font26),
               ),
               SizedBox(
                 height: Dimensions.height20,
@@ -51,7 +51,7 @@ class OrderSuccessPage extends StatelessWidget {
                     horizontal: Dimensions.height20,
                     vertical: Dimensions.height10),
                 child: Text(
-                  status == 1 ? 'Successful order' : 'Failed order',
+                  status == 1 ? 'Purchase was successful' : 'Purchase was failed',
                   style: TextStyle(
                       fontSize: Dimensions.font20,
                       color: Theme.of(context).disabledColor),
@@ -64,7 +64,8 @@ class OrderSuccessPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(Dimensions.height20),
                 child: CustomButton(
-                    buttonText: 'Back to Home',
+                    buttonText: 'Done',
+                    fontSize: Dimensions.font20,
                     onPressed: () => Get.offAllNamed(RouteHelper.getInitial())),
               ),
             ],
