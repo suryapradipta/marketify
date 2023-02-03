@@ -255,17 +255,16 @@ class AccountPage extends StatelessWidget {
                   children: [
                     Container(
 
-                      height: MediaQuery.of(context).size.height*0.44,
+                      height: MediaQuery.of(context).size.height * 0.22,
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.only(
                           left: Dimensions.width20, right: Dimensions.width20),
                       decoration: BoxDecoration(
-                        color: Colors.redAccent,
                         borderRadius:
                             BorderRadius.circular(Dimensions.radius20),
                         image: DecorationImage(
                           scale: 2,
-                          image: AssetImage("assets/image/signin_one.jpg"),
+                          image: AssetImage("assets/image/signin_one.png"),
                         ),
                       ),
                     ),
