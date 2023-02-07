@@ -1,4 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:marketify/controllers/popular_product_controller.dart';
@@ -13,11 +14,13 @@ import 'package:get/get.dart';
 
 import '../../base/custom_loader.dart';
 import '../../controllers/auth_controller.dart';
+import '../../controllers/cart_controller.dart';
 import '../../controllers/user_controller.dart';
 import '../../models/products_model.dart';
 import '../../routes/route_helper.dart';
 import '../../start/widgets/app_text.dart';
 import '../../utils/app_constants.dart';
+import '../../widgets/app_icon.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -60,6 +63,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[1];
+    Get.find<PopularProductController>()
+        .initProduct(product, Get.find<CartController>());
+
     String timeWidget(String date) {
       var outputDate = DateTime.now().toString();
       DateTime parseDate = DateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
@@ -68,6 +75,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       outputDate = outputFormat.format(inputDate);
       return outputDate;
     }
+
 
     return Column(
       children: [
@@ -144,13 +152,66 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                             borderRadius:
                                 BorderRadius.circular(Dimensions.radius15),
                             color: AppColors.mainColor),
-                        child: Center(
-                          child: Icon(
-                            Icons.notifications,
-                            color: Colors.white,
-                            size: Dimensions.iconSize24,
-                          ),
-                        ),
+                        // CART ICON START ====================================
+
+
+                        child: GetBuilder<PopularProductController>(builder: (controller) {
+                          return GestureDetector(
+                            onTap: () {
+                              if (controller.totalItems >= 0) {
+                                Get.toNamed(RouteHelper.getCartPage());
+                              }
+                            },
+                            child: Stack(
+                              children: [
+                                Center(
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(Dimensions.radius20),
+                                          color: AppColors.mainColor),
+                                      child: Icon(
+                                        CupertinoIcons.cart_fill,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    )),
+                                Get.find<PopularProductController>().totalItems >= 1
+                                    ? Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: AppIcon(
+                                    icon: Icons.circle,
+                                    size: 20,
+                                    iconColor: Colors.transparent,
+                                    backgroundColor: const Color(0xFFfcf4e4),
+                                  ),
+                                )
+                                    : Container(),
+
+                                // TEXT IN CART ICON
+                                Get.find<PopularProductController>().totalItems >= 1
+                                    ? Positioned(
+                                  right: 6,
+                                  top: 3,
+                                  child: BigText(
+                                    text: Get.find<PopularProductController>()
+                                        .totalItems
+                                        .toString(),
+                                    size: 12,
+                                    color: const Color(0xFF756d54),
+                                  ),
+                                )
+                                    : Container()
+                              ],
+                            ),
+                          );
+                        }),
+
+
+                        // CART ICON END ====================================
+
                       ),
                     ]),
                   ),

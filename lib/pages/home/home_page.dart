@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
 
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.cart_fill),
-        title: ("Cart"),
+        title: ("History"),
         activeColorPrimary: AppColors.mainColor,
         // activeColorSecondary: Colors.white,
 
