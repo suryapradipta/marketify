@@ -22,16 +22,16 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> animation;
   late AnimationController controller;
 
-  Future<void> _loadResource() async {
-    await Get.find<PopularProductController>().getPopularProductList();
-    await Get.find<RecommendedProductController>().getRecommendedProductList();
+  Future<void> _loadResource(bool reload) async {
+    await Get.find<PopularProductController>().getPopularProductList(reload);
+    await Get.find<RecommendedProductController>().getRecommendedProductList(reload);
   }
 
 
   @override
   void initState() {
     super.initState();
-    _loadResource();
+    _loadResource(true);
 
 
     // duration animation

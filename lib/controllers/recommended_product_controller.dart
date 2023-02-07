@@ -18,18 +18,22 @@ class RecommendedProductController extends GetxController {
   bool get isLoaded => _isLoaded;
 
   // get product list from the server
-  Future<void> getRecommendedProductList() async {
-    // await needed because 'Future'
-    Response response = await recommendedProductRepo.getRecommendedProductList();
-    if (response.statusCode == 200) {
-      // print("got products recommended");
-      _recommendedProductList = [];
-      _recommendedProductList.addAll(Product.fromJson(response.body).products);
-      _isLoaded=true;
-      update();
-    } else {
-      print("could not get products recommended");
-
+  Future<void> getRecommendedProductList(bool reload) async {
+    if(_recommendedProductList == null || reload) {
+      // await needed because 'Future'
+      Response response = await recommendedProductRepo
+          .getRecommendedProductList();
+      if (response.statusCode == 200) {
+        // print("got products recommended");
+        _recommendedProductList = [];
+        _recommendedProductList.addAll(Product
+            .fromJson(response.body)
+            .products);
+        _isLoaded = true;
+        update();
+      } else {
+        print("could not get products recommended");
+      }
     }
   }
 }

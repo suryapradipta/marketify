@@ -34,19 +34,20 @@ class PopularProductController extends GetxController {
 
 
   // get product list from the server
-  Future<void> getPopularProductList() async {
-    // await needed because 'Future'
-    Response response = await popularProductRepo.getPopularProductList();
-    if (response.statusCode == 200) {
-      // print("got products");
-      _popularProductList = [];
-      _popularProductList.addAll(Product.fromJson(response.body).products);
-      // print(_popularProductList);
-      _isLoaded = true;
-      update();
-    } else {}
+  Future<void> getPopularProductList(bool reload) async {
+    if (_popularProductList == null || reload) {
+      // await needed because 'Future'
+      Response response = await popularProductRepo.getPopularProductList();
+      if (response.statusCode == 200) {
+        // print("got products");
+        _popularProductList = [];
+        _popularProductList.addAll(Product.fromJson(response.body).products);
+        // print(_popularProductList);
+        _isLoaded = true;
+        update();
+      } else {}
+    }
   }
-
 
   //=================REUSABLE
   // shopping product controller

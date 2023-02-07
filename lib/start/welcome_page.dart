@@ -27,18 +27,18 @@ class _WelcomePageState extends State<WelcomePage> {
     "assets/image/welcome3.png":"Through this application, retailers and customers may perform sales, purchases, payments, and shipment.",
   };
 
-  Future<void> _loadResource() async {
+  Future<void> _loadResource(bool reload) async {
     bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
     if (_userLoggedIn) {
       await Get.find<UserController>().getUserInfo();
     }
-    await Get.find<PopularProductController>().getPopularProductList();
-    await Get.find<RecommendedProductController>().getRecommendedProductList();
+    await Get.find<PopularProductController>().getPopularProductList(reload);
+    await Get.find<RecommendedProductController>().getRecommendedProductList(reload);
   }
 
   void initState() {
     super.initState();
-    _loadResource();
+    _loadResource(true);
 
   }
 

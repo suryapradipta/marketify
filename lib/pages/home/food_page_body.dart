@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import '../../base/custom_loader.dart';
 import '../../controllers/auth_controller.dart';
 import '../../controllers/cart_controller.dart';
+import '../../controllers/location_controller.dart';
 import '../../controllers/user_controller.dart';
 import '../../models/products_model.dart';
 import '../../routes/route_helper.dart';
@@ -27,9 +28,12 @@ class FoodPageBody extends StatefulWidget {
 
   @override
   State<FoodPageBody> createState() => _FoodPageBodyState();
+
 }
 
 class _FoodPageBodyState extends State<FoodPageBody> {
+
+
   PageController pageController = PageController(
       viewportFraction:
           0.85); // show next and previous slide page menu on hero section
@@ -44,10 +48,27 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     "bread.png": "Breads"
   };
 
+  Future<void>_loadResources(bool reload)async {
+    await  Get.find<RecommendedProductController>().getRecommendedProductList(reload);
+    await  Get.find<PopularProductController>().getPopularProductList(reload);
+    if(Get.find<AuthController>().userLoggedIn()) {
+      await Get.find<UserController>().getUserInfo();
+      await Get.find<LocationController>().getAddressList();
+
+      if(Get.find<LocationController>().addressList.isNotEmpty){
+        var address = Get.find<LocationController>().addressList[0];
+        await Get.find<LocationController>().saveUserAddress(address);
+        print("I am in splash page ............");
+      }
+    }
+  }
+
   @override
   void initState() {
     // to know the current page value
     super.initState();
+    _loadResources(true);
+
     pageController.addListener(() {
       setState(() {
         _currPageValue = pageController.page!;
@@ -82,6 +103,30 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         SizedBox(
           height: Dimensions.height20,
         ),
+
+
+        Container(
+            margin: EdgeInsets.only(
+                left: Dimensions.width20,
+                right: Dimensions.width20,
+                bottom: Dimensions.width10),
+            height: Dimensions.iconBackSize,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.borderRadius15),
+                color: Colors.white),
+            child: GestureDetector(
+              onTap: () => Get.toNamed(RouteHelper.getSearchRoute()),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Search food"),
+                    Icon(Icons.search),
+                  ],
+                ),
+              ),
+            )),
 
         // PROFILE BADGES START ================================================
         GetBuilder<UserController>(builder: (userController) {
@@ -159,7 +204,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           return GestureDetector(
                             onTap: () {
                               if (controller.totalItems >= 0) {
-                                Get.toNamed(RouteHelper.getCartPage());
+                                Get.toNamed(RouteHelper.getCartPage(0, "cart-history"));
+
                               }
                             },
                             child: Stack(
