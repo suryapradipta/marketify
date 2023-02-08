@@ -186,7 +186,7 @@ class AccountPage extends StatelessWidget {
                                 // CUSTOMER SERVICE START ======================
                                 AccountWidget(
                                   appIcon: AppIcon(
-                                    icon: Icons.add,
+                                    icon:  Icons.help_outline,
                                     backgroundColor: Colors.white,
                                     iconColor: AppColors.iconColor1,
                                     iconSize: Dimensions.height10 * 5 / 2,
