@@ -11,12 +11,14 @@ import '../controllers/cart_controller.dart';
 import '../controllers/location_controller.dart';
 import '../controllers/popular_product_controller.dart';
 import '../controllers/recommended_product_controller.dart';
+import '../controllers/search_product_controller.dart';
 import '../controllers/user_controller.dart';
 import '../data/api/api_client.dart';
 import '../data/repository/auth_repo.dart';
 import '../data/repository/cart_repo.dart';
 import '../data/repository/popular_product_repo.dart';
 import '../data/repository/recommended_product_repo.dart';
+import '../data/repository/search_product_repo.dart';
 import '../data/repository/user_repo.dart';
 import '../utils/app_constants.dart';
 
@@ -36,12 +38,15 @@ Future<void> init() async {
 
 
 
+
   // repository
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => CartRepo(sharedPreferences: Get.find()));
   Get.lazyPut(() => LocationRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
   Get.lazyPut(() => OrderRepo(apiClient: Get.find()));
+  Get.lazyPut(() => SearchProductRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+
 
 
   // controllers
@@ -53,6 +58,8 @@ Future<void> init() async {
   Get.lazyPut(() => CartController(cartRepo: Get.find()));
   Get.lazyPut(() => LocationController(locationRepo: Get.find()));
   Get.lazyPut(() => OrderController(orderRepo: Get.find()));
+  Get.lazyPut(() => SearchProductController(searchProductRepo: Get.find()));
+
 
 }
 

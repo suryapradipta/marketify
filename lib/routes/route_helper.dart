@@ -11,6 +11,7 @@ import '../pages/cart/cart_page.dart';
 import '../pages/home/home_page.dart';
 import '../pages/home/main_food_page.dart';
 import '../pages/payment/order_success_page.dart';
+import '../pages/search/seach_product_page.dart';
 import '../pages/splash/splash_page.dart';
 import '../start/welcome_page.dart';
 
@@ -26,6 +27,10 @@ class RouteHelper {
   static const String pickAddressMap = "/pick-address";
   static const String payment = "/payment";
   static const String orderSuccess = "/order-successful";
+  static const String search ='/search';
+
+  static String getSearchRoute()=>'$search';
+
 
   static String getSplashPage() => '$splashPage';
 
@@ -42,7 +47,8 @@ class RouteHelper {
   static String getRecommendedFood(int pageId, String page) =>
       '$recommendedFood?pageId=$pageId&page=$page';
 
-  static String getCartPage() => '$cartPage';
+  static String getCartPage(int pageId, String page)=>'$cartPage?id=$pageId&page=$page';
+
 
   static String getSignInPage() => '$signIn';
 
@@ -87,9 +93,12 @@ class RouteHelper {
     GetPage(
         name: cartPage,
         page: () {
-          return CartPage();
+          return CartPage(
+              pageId: int.parse(Get.parameters['id']!),
+              page: Get.parameters['page']!);
         },
-        transition: Transition.fadeIn),
+        transition: Transition.fadeIn
+    ),
     GetPage(
         name: addAddress,
         page: () {
@@ -108,5 +117,7 @@ class RouteHelper {
           orderID: Get.parameters['id']!,
           status: Get.parameters["status"].toString().contains("success")?1:0,
         )),
+    GetPage(name: search, page: () => SearchScreen()),
+
   ];
 }

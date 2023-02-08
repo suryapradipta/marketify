@@ -6,6 +6,9 @@ class AppConstants {
   static const String POPULAR_PRODUCT_URI ="/api/v1/products/popular";
   static const String RECOMMENDED_PRODUCT_URI ="/api/v1/products/recommended";
   // static const String DRINKS_URI ="/api/v1/products/drinks";
+  static const String SEARCH_URI = '/api/v1/products/search';
+  static  String UPLOADS_URL =BASE_URL+'/uploads/';
+
 
 
   // USER AND AUTH END POINTS

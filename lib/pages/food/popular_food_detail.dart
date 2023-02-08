@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:marketify/controllers/cart_controller.dart';
 import 'package:marketify/controllers/popular_product_controller.dart';
 import 'package:marketify/pages/home/main_food_page.dart';
@@ -24,6 +25,15 @@ class PopularFoodDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String timeWidget(String date) {
+      var outputDate = DateTime.now().toString();
+      DateTime parseDate = DateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+      var inputDate = DateTime.parse(parseDate.toString());
+      var outputFormat = DateFormat("MM/dd/yyyy");
+      outputDate = outputFormat.format(inputDate);
+      return outputDate;
+    }
+    
     var product = Get.find<PopularProductController>().popularProductList[pageId];
     Get.find<PopularProductController>().initProduct(product, Get.find<CartController>());
 
@@ -61,7 +71,8 @@ class PopularFoodDetail extends StatelessWidget {
                       onTap: () {
                         // Get.to untuk beralih halaman
                         if (page == "cartpage") {
-                          Get.toNamed(RouteHelper.getCartPage());
+                          Get.toNamed(RouteHelper.getCartPage(0, "cart-history"));
+
                         } else {
                           Get.toNamed(RouteHelper.getInitial());
                         }
@@ -73,7 +84,8 @@ class PopularFoodDetail extends StatelessWidget {
                     return GestureDetector(
                       onTap: () {
                         if (controller.totalItems >= 0)
-                          Get.toNamed(RouteHelper.getCartPage());
+                          Get.toNamed(RouteHelper.getCartPage(0, "cart-history"));
+
                       },
                       child: Stack(
                         children: [
@@ -159,7 +171,7 @@ class PopularFoodDetail extends StatelessWidget {
                             SizedBox(
                               width: 10,
                             ),
-                            SmallText(text: product.stars.toString()),
+                            SmallText(text: "("+product.stars!.toString() +")"),
 
                             SizedBox(
                               width: 5,
@@ -167,14 +179,20 @@ class PopularFoodDetail extends StatelessWidget {
                             SmallText(text: "stars"),
 
                             SizedBox(
-                              width: 10,
+                              width: Dimensions.width20,
                             ),
-
-                            SmallText(text: "34"),
+                            Icon(
+                              Icons.date_range,
+                              color: AppColors.mainColor,
+                              size: 15,),
                             SizedBox(
-                              width: 5,
+                              width: Dimensions.width10 - 5,
                             ),
-                            SmallText(text: "comments"),
+                            SmallText(text: ""+timeWidget(product.createdAt.toString())+""),
+                            SmallText(text: " offered"),
+
+
+
                           ],
                         ),
                         SizedBox(
@@ -195,7 +213,7 @@ class PopularFoodDetail extends StatelessWidget {
                                 iconColor: AppColors.mainColor),
                             IconAndTextWidget(
                                 icon: Icons.favorite_outlined,
-                                text: product.selected_people.toString() +
+                                text: "(" +product.selected_people.toString() +")"+
                                     " selected people",
                                 iconColor: AppColors.iconColor2),
                           ],

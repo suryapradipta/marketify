@@ -67,7 +67,7 @@ class AccountPage extends StatelessWidget {
                                 // NAME START ==================================
                                 AccountWidget(
                                   appIcon: AppIcon(
-                                    icon: Icons.person_rounded,
+                                    icon: CupertinoIcons.person_solid,
                                     backgroundColor: Colors.white,
                                     iconColor: AppColors.mainColor,
                                     iconSize: Dimensions.height10 * 5 / 2,
@@ -85,7 +85,7 @@ class AccountPage extends StatelessWidget {
                                 // PHONE START =================================
                                 AccountWidget(
                                   appIcon: AppIcon(
-                                    icon: Icons.phone_iphone,
+                                    icon: CupertinoIcons.phone_solid,
                                     backgroundColor: Colors.white,
                                     iconColor: AppColors.mainColor,
                                     iconSize: Dimensions.height10 * 5 / 2,
@@ -169,7 +169,7 @@ class AccountPage extends StatelessWidget {
                                 //MESSAGE START ================================
                                 AccountWidget(
                                   appIcon: AppIcon(
-                                    icon: Icons.message,
+                                    icon: CupertinoIcons.captions_bubble_fill,
                                     backgroundColor: Colors.white,
                                     iconColor: AppColors.mainColor,
                                     iconSize: Dimensions.height10 * 5 / 2,
@@ -186,7 +186,7 @@ class AccountPage extends StatelessWidget {
                                 // CUSTOMER SERVICE START ======================
                                 AccountWidget(
                                   appIcon: AppIcon(
-                                    icon: Icons.help_outline,
+                                    icon: CupertinoIcons.h,
                                     backgroundColor: Colors.white,
                                     iconColor: AppColors.iconColor1,
                                     iconSize: Dimensions.height10 * 5 / 2,

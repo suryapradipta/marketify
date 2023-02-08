@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import '../data/api/api_checker.dart';
 import '../data/repository/search_product_repo.dart';
 import '../models/products_model.dart';
+
 class SearchProductController extends GetxController implements GetxService {
   final SearchProductRepo searchProductRepo;
+
   SearchProductController({required this.searchProductRepo});
 
-  List<ProductModel> _searchProductList=[];
-  List<ProductModel> _allProductList=[];
+  List<ProductModel> _searchProductList = [];
+  List<ProductModel> _allProductList = [];
 
   String _searchText = '';
   String _prodResultText = '';
@@ -26,17 +28,27 @@ class SearchProductController extends GetxController implements GetxService {
   bool _isDiscountedFoods = false;
 
   List<ProductModel>? get searchProductList => _searchProductList;
+
   List<ProductModel>? get allProductList => _allProductList;
 
   String get searchText => _searchText;
+
   double get lowerValue => _lowerValue;
+
   double get upperValue => _upperValue;
+
   bool get isSearchMode => _isSearchMode;
+
   List<String> get historyList => _historyList;
+
   List<String> get sortList => _sortList;
+
   int get sortIndex => _sortIndex;
+
   int get rating => _rating;
+
   bool get isAvailableFoods => _isAvailableFoods;
+
   bool get isDiscountedFoods => _isDiscountedFoods;
 
   void toggleAvailableFoods() {
@@ -56,7 +68,7 @@ class SearchProductController extends GetxController implements GetxService {
 
   void setSearchMode(bool isSearchMode) {
     _isSearchMode = isSearchMode;
-    if(isSearchMode) {
+    if (isSearchMode) {
       _searchText = '';
       _prodResultText = '';
       _allProductList = [];
@@ -77,45 +89,36 @@ class SearchProductController extends GetxController implements GetxService {
     update();
   }
 
-
-
   void setSearchText(String text) {
     _searchText = text;
     update();
   }
 
-
-
   void searchData(String query) async {
-    if( (!_isRestaurant && query.isNotEmpty && query != _prodResultText)) {
+    if ((!_isRestaurant && query.isNotEmpty && query != _prodResultText)) {
       _searchText = query;
-
 
       _searchProductList = [];
       _allProductList = [];
 
-
       _isSearchMode = false;
-
 
       update();
 
       Response response = await searchProductRepo.getSearchData(query);
       if (response.statusCode == 200) {
-
-
         _prodResultText = query;
         _searchProductList = [];
         _allProductList = [];
         _searchProductList.addAll(Product.fromJson(response.body).products);
         _allProductList.addAll(Product.fromJson(response.body).products);
-
       } else {
         ApiChecker.checkApi(response);
       }
       update();
     }
   }
+
   /*
   void getHistoryList() {
     _searchText = '';
@@ -154,5 +157,4 @@ class SearchProductController extends GetxController implements GetxService {
     _sortIndex = -1;
     update();
   }
-
 }

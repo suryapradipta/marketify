@@ -100,33 +100,49 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
     return Column(
       children: [
-        SizedBox(
-          height: Dimensions.height20,
-        ),
-
-
-        Container(
-            margin: EdgeInsets.only(
-                left: Dimensions.width20,
-                right: Dimensions.width20,
-                bottom: Dimensions.width10),
-            height: Dimensions.iconBackSize,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.borderRadius15),
-                color: Colors.white),
-            child: GestureDetector(
-              onTap: () => Get.toNamed(RouteHelper.getSearchRoute()),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Search food"),
-                    Icon(Icons.search),
-                  ],
+        // SEARCH START =========================================================
+        GestureDetector(
+          onTap: () => Get.toNamed(RouteHelper.getSearchRoute()),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(
+                      left: Dimensions.width30,
+                      right: Dimensions.width30,
+                      bottom: Dimensions.width10),
+                  height: Dimensions.iconBackSize,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius15),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 5),
+                            blurRadius: 5,
+                            color: Colors.grey[100]!)
+                      ]),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SmallText(
+                          text: "Search by Keyword",
+                          size: Dimensions.font16,
+                        ),
+                        Icon(
+                          Icons.search,
+                          color: AppColors.mainColor,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            )),
+            ],
+          ),
+        ),
+        // SEARCH END =========================================================
 
         // PROFILE BADGES START ================================================
         GetBuilder<UserController>(builder: (userController) {
@@ -150,13 +166,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         left: Dimensions.width20, right: Dimensions.width20),
                     child: Row(children: [
                       CircleAvatar(
-                        radius: 40,
+                        radius: Dimensions.radius20 * 2,
                         backgroundImage:
                             AssetImage("assets/image/profile_one.png"),
                         backgroundColor: AppColors.mainColor,
                       ),
                       SizedBox(
-                        width: 10,
+                        width: Dimensions.width10,
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -166,7 +182,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                             "Welcome!",
                             style: TextStyle(
                                 color: AppColors.mainColor,
-                                fontSize: 18,
+                                fontSize: Dimensions.font20,
                                 decoration: TextDecoration.none),
                           ),
                           SizedBox(
@@ -175,7 +191,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           Text(
                             userController.userModel!.name,
                             style: TextStyle(
-                                color: Color(0xFF3b3f42),
+                                color: const Color(0xFF3b3f42),
                                 fontSize: 18,
                                 decoration: TextDecoration.none),
                           ),

@@ -25,7 +25,9 @@ import '../order/delivery_options.dart';
 import '../order/payment_option_button.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+  final int pageId;
+  String page;
+  CartPage({Key? key, required this.pageId, required this.page}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
