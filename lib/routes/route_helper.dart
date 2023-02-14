@@ -1,4 +1,5 @@
 import 'package:marketify/pages/auth/sign_in_page.dart';
+import 'package:marketify/pages/chat/chat_page.dart';
 import 'package:marketify/pages/food/popular_food_detail.dart';
 import 'package:marketify/pages/food/recommended_food_detail.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,8 @@ class RouteHelper {
   static const String payment = "/payment";
   static const String orderSuccess = "/order-successful";
   static const String search ='/search';
+  static const String chat ='/chat';
+
 
   static String getSearchRoute()=>'$search';
 
@@ -53,6 +56,9 @@ class RouteHelper {
   static String getSignInPage() => '$signIn';
 
   static String getAddressPage() => '$addAddress';
+
+  static String getChatPage() => '$chat';
+
 
   static String getPickAddressPage() => '$pickAddressMap';
 
@@ -103,6 +109,11 @@ class RouteHelper {
         name: addAddress,
         page: () {
           return AddAddressPage();
+        }),
+    GetPage(
+        name: chat,
+        page: () {
+          return ChatPage();
         }),
     GetPage(
         name: payment,

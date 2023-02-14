@@ -184,15 +184,21 @@ class AccountPage extends StatelessWidget {
                                 ),
 
                                 // CUSTOMER SERVICE START ======================
-                                AccountWidget(
-                                  appIcon: AppIcon(
-                                    icon:  Icons.help_outline,
-                                    backgroundColor: Colors.white,
-                                    iconColor: AppColors.iconColor1,
-                                    iconSize: Dimensions.height10 * 5 / 2,
-                                    size: Dimensions.height10 * 5,
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.offNamed(
+                                        RouteHelper.getChatPage());
+                                  },
+                                  child: AccountWidget(
+                                    appIcon: AppIcon(
+                                      icon:  Icons.help_outline,
+                                      backgroundColor: Colors.white,
+                                      iconColor: AppColors.iconColor1,
+                                      iconSize: Dimensions.height10 * 5 / 2,
+                                      size: Dimensions.height10 * 5,
+                                    ),
+                                    bigText: BigText(text: "Customer Services"),
                                   ),
-                                  bigText: BigText(text: "Customer Services"),
                                 ),
                                 // CUSTOMER SERVICE END ======================
 
