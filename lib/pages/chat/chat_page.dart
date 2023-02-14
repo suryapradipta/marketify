@@ -56,7 +56,7 @@ class _ChatPageState extends State<ChatPage> {
 
     _subscription = chatGPT!
         .build(
-            token: "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",
+            token: "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",
             baseOption: HttpSetup(receiveTimeout: 6000),
             isLogger: true)
         .onCompleteStream(request: request)
