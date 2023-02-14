@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:marketify/controllers/cart_controller.dart';
 import 'package:marketify/controllers/popular_product_controller.dart';
 import 'package:marketify/routes/route_helper.dart';
@@ -10,6 +11,7 @@ import 'helper/dependencies.dart' as dep; // as dependencies
 Future<void> main() async {
   // make sure dependencies load correctly, and wait until dep loaded
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
 
   // load dependencies
   await dep.init();

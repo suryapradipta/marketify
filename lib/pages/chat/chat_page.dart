@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:marketify/pages/chat/three_dots.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -56,7 +57,7 @@ class _ChatPageState extends State<ChatPage> {
 
     _subscription = chatGPT!
         .build(
-            token: "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",
+            token: dotenv.env["API_KEY"],
             baseOption: HttpSetup(receiveTimeout: 6000),
             isLogger: true)
         .onCompleteStream(request: request)
