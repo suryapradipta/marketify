@@ -27,6 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
+        elevation: 0,
         // elevation: 0,
         leading: backButtonExist
             ? IconButton(
