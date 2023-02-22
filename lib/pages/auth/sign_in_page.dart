@@ -1,4 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -34,23 +33,7 @@ class SignInPage extends StatelessWidget {
         showCustomSnackBar("Type in your password", title: "Password");
       }
       else if(password.length<6) {
-        final snackBar = SnackBar(
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'Password!',
-            message:
-            'Password must be at least 6 characters long for security reasons.',
-
-            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-            contentType: ContentType.warning,
-          ),
-        );
-
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
+        showCustomSnackBar("Password can not be less than six characters", title: "Password");
       }
       else {
         authController.login(phone, password).then((status) {
