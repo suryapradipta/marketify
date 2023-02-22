@@ -1,4 +1,6 @@
+import 'package:marketify/pages/account/account_page.dart';
 import 'package:marketify/pages/auth/sign_in_page.dart';
+import 'package:marketify/pages/cart/cart_history.dart';
 import 'package:marketify/pages/chat/chat_page.dart';
 import 'package:marketify/pages/food/popular_food_detail.dart';
 import 'package:marketify/pages/food/recommended_food_detail.dart';
@@ -28,12 +30,16 @@ class RouteHelper {
   static const String pickAddressMap = "/pick-address";
   static const String payment = "/payment";
   static const String orderSuccess = "/order-successful";
-  static const String search ='/search';
-  static const String chat ='/chat';
+  static const String search = '/search';
+  static const String chat = '/chat';
+  static const String account = '/account';
+  static const String cartHistory = '/cart-history';
 
+  static String getSearchRoute() => '$search';
 
-  static String getSearchRoute()=>'$search';
+  static String getAccountPage() => '$account';
 
+  static String getCartHistory() => '$cartHistory';
 
   static String getSplashPage() => '$splashPage';
 
@@ -50,8 +56,8 @@ class RouteHelper {
   static String getRecommendedFood(int pageId, String page) =>
       '$recommendedFood?pageId=$pageId&page=$page';
 
-  static String getCartPage(int pageId, String page)=>'$cartPage?id=$pageId&page=$page';
-
+  static String getCartPage(int pageId, String page) =>
+      '$cartPage?id=$pageId&page=$page';
 
   static String getSignInPage() => '$signIn';
 
@@ -59,12 +65,13 @@ class RouteHelper {
 
   static String getChatPage() => '$chat';
 
-
   static String getPickAddressPage() => '$pickAddressMap';
 
-  static String getPaymentPage(String id, int userID) => '$payment?id=$id&userID=$userID';
+  static String getPaymentPage(String id, int userID) =>
+      '$payment?id=$id&userID=$userID';
 
-  static String getOrderSuccessPage(String orderID, String status) => '$orderSuccess?id=$orderID&status=$status';
+  static String getOrderSuccessPage(String orderID, String status) =>
+      '$orderSuccess?id=$orderID&status=$status';
 
   static List<GetPage> routes = [
     GetPage(
@@ -75,7 +82,12 @@ class RouteHelper {
         }),
     GetPage(name: splashPage, page: () => SplashScreen()),
     GetPage(name: welcomePage, page: () => WelcomePage()),
-    GetPage(name: initial, page: () => HomePage(), transition: Transition.fadeIn),
+    GetPage(name: account, page: () => AccountPage()),
+    GetPage(name: cartHistory, page: () => CartHistory()),
+
+
+    GetPage(
+        name: initial, page: () => HomePage(), transition: Transition.fadeIn),
     GetPage(
         name: signIn, page: () => SignInPage(), transition: Transition.fade),
     GetPage(
@@ -103,8 +115,7 @@ class RouteHelper {
               pageId: int.parse(Get.parameters['id']!),
               page: Get.parameters['page']!);
         },
-        transition: Transition.fadeIn
-    ),
+        transition: Transition.fadeIn),
     GetPage(
         name: addAddress,
         page: () {
@@ -125,10 +136,11 @@ class RouteHelper {
     GetPage(
         name: orderSuccess,
         page: () => OrderSuccessPage(
-          orderID: Get.parameters['id']!,
-          status: Get.parameters["status"].toString().contains("success")?1:0,
-        )),
+              orderID: Get.parameters['id']!,
+              status: Get.parameters["status"].toString().contains("success")
+                  ? 1
+                  : 0,
+            )),
     GetPage(name: search, page: () => SearchScreen()),
-
   ];
 }

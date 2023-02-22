@@ -1,3 +1,4 @@
+import 'package:alan_voice/alan_voice.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -62,12 +63,42 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       }
     }
   }
+  
+  setUpAlan() {
+    /// Init Alan Button with project key from Alan Studio
+    AlanVoice.addButton(
+        "f6f6f5dc8189032ea5dda6d779db1cde2e956eca572e1d8b807a3e2338fdd0dc/stage",
+        buttonAlign: AlanVoice.BUTTON_ALIGN_LEFT);
+
+    /// Handle commands from Alan Studio
+    AlanVoice.onCommand.add((command) => _handleCommand(command.data));
+  }
+
+  void _handleCommand(Map<String, dynamic> command) {
+    switch (command["command"]) {
+      case "cart":
+        Get.toNamed(RouteHelper.getCartPage(0, "cart-history"));
+        break;
+      case "back":
+        Get.toNamed(RouteHelper.getInitial());
+        break;
+      case "account":
+        Get.toNamed(RouteHelper.getAccountPage());
+        break;
+      case "history":
+        Get.toNamed(RouteHelper.getCartHistory());
+        break;
+      default:
+        debugPrint("unknown command");
+    }
+  }
 
   @override
   void initState() {
     // to know the current page value
     super.initState();
     _loadResources(true);
+    setUpAlan();
 
     pageController.addListener(() {
       setState(() {
@@ -221,7 +252,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                             onTap: () {
                               if (controller.totalItems >= 0) {
                                 Get.toNamed(RouteHelper.getCartPage(0, "cart-history"));
-
                               }
                             },
                             child: Stack(
