@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketify/base/flash_message_screen.dart';
 import 'package:marketify/controllers/cart_controller.dart';
 import 'package:marketify/controllers/popular_product_controller.dart';
 import 'package:marketify/routes/route_helper.dart';
@@ -36,10 +37,10 @@ class MyApp extends StatelessWidget {
           title: 'Marketify',
 
           // home: SignInPage(),
-          // home: SplashScreen(),
+          home: FlashMessageScreen(),
           // initialRoute: RouteHelper.getSplashPage(),
-          initialRoute: RouteHelper.welcomePage,
-          getPages: RouteHelper.routes,
+          // initialRoute: RouteHelper.welcomePage,
+          // getPages: RouteHelper.routes,
           theme:
               ThemeData(primaryColor: AppColors.mainColor, fontFamily: "Lato"),
         );
