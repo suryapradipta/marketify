@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:marketify/controllers/cart_controller.dart';
@@ -104,19 +105,37 @@ class PopularFoodDetail extends StatelessWidget {
                               : Container(),
 
                           // TEXT IN CART ICON
-                          Get.find<PopularProductController>().totalItems >= 1
-                              ? Positioned(
-                                  right: 6,
-                                  top: 3,
-                                  child: BigText(
-                                    text: Get.find<PopularProductController>()
-                                        .totalItems
-                                        .toString(),
-                                    size: 12,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : Container()
+                          if (Get.find<PopularProductController>().totalItems >=
+                                  1 &&
+                              Get.find<PopularProductController>().totalItems <
+                                  10)
+                            Positioned(
+                              right: 6,
+                              top: 3,
+                              child: BigText(
+                                text: Get.find<PopularProductController>()
+                                    .totalItems
+                                    .toString(),
+                                size: 12,
+                                color: Colors.white,
+                              ),
+                            )
+                          else if (Get.find<PopularProductController>()
+                                  .totalItems >=
+                              10)
+                            Positioned(
+                              right: 3,
+                              top: 3,
+                              child: BigText(
+                                text: Get.find<PopularProductController>()
+                                    .totalItems
+                                    .toString(),
+                                size: 12,
+                                color: Colors.white,
+                              ),
+                            )
+                          else
+                            Container()
                         ],
                       ),
                     );

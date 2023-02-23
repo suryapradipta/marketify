@@ -72,8 +72,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     child: Stack(
                       children: [
                         AppIcon(icon: Icons.shopping_cart_outlined),
-                        Get.find<PopularProductController>().totalItems >= 1
-                            ? Positioned(
+                        if (Get.find<PopularProductController>().totalItems >= 1) Positioned(
                                 right: 0,
                                 top: 0,
                                 child: AppIcon(
@@ -82,23 +81,40 @@ class RecommendedFoodDetail extends StatelessWidget {
                                   iconColor: Colors.transparent,
                                   backgroundColor: AppColors.mainColor,
                                 ),
-                              )
-                            : Container(),
+                              ) else Container(),
 
                         // TEXT IN CART ICON
-                        Get.find<PopularProductController>().totalItems >= 1
-                            ? Positioned(
-                                right: 6,
-                                top: 3,
-                                child: BigText(
-                                  text: Get.find<PopularProductController>()
-                                      .totalItems
-                                      .toString(),
-                                  size: 12,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : Container()
+                        if (Get.find<PopularProductController>().totalItems >=
+                                1 &&
+                            Get.find<PopularProductController>().totalItems <
+                                10)
+                          Positioned(
+                            right: 6,
+                            top: 3,
+                            child: BigText(
+                              text: Get.find<PopularProductController>()
+                                  .totalItems
+                                  .toString(),
+                              size: 12,
+                              color: Colors.white,
+                            ),
+                          )
+                        else if (Get.find<PopularProductController>()
+                                .totalItems >=
+                            10)
+                          Positioned(
+                            right: 3,
+                            top: 3,
+                            child: BigText(
+                              text: Get.find<PopularProductController>()
+                                  .totalItems
+                                  .toString(),
+                              size: 12,
+                              color: Colors.white,
+                            ),
+                          )
+                        else
+                          Container()
                       ],
                     ),
                   );

@@ -286,24 +286,55 @@ class _SearchResultWidgetState extends State<SearchResultWidget>
                                                                       ),
                                                                     )
                                                                   : Container(),
-                                                              Get.find<CartController>()
+
+                                                              if (Get.find<CartController>()
                                                                           .totalItems >
-                                                                      1
-                                                                  ? Positioned(
-                                                                      right: 5,
-                                                                      top: 3,
-                                                                      child: Center(
-                                                                          child: Text(
-                                                                        Get.find<CartController>()
-                                                                            .totalItems
-                                                                            .toString(),
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                Dimensions.font12,
-                                                                            color: Colors.white),
-                                                                      )),
-                                                                    )
-                                                                  : Container()
+                                                                      1 &&
+                                                                  Get.find<CartController>()
+                                                                          .totalItems <
+                                                                      10)
+                                                                Positioned(
+                                                                  right: 5,
+                                                                  top: 3,
+                                                                  child: Center(
+                                                                      child:
+                                                                          Text(
+                                                                    Get.find<
+                                                                            CartController>()
+                                                                        .totalItems
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            Dimensions
+                                                                                .font12,
+                                                                        color: Colors
+                                                                            .white),
+                                                                  )),
+                                                                )
+                                                              else if (Get.find<
+                                                                          CartController>()
+                                                                      .totalItems >=
+                                                                  10)
+                                                                Positioned(
+                                                                  right: 4,
+                                                                  top: 3,
+                                                                  child: Center(
+                                                                      child:
+                                                                          Text(
+                                                                    Get.find<
+                                                                            CartController>()
+                                                                        .totalItems
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            Dimensions
+                                                                                .font12,
+                                                                        color: Colors
+                                                                            .white),
+                                                                  )),
+                                                                )
+                                                              else
+                                                                Container()
                                                             ],
                                                           );
                                                         }),

@@ -283,19 +283,39 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                     : Container(),
 
                                 // TEXT IN CART ICON
-                                Get.find<PopularProductController>().totalItems >= 1
-                                    ? Positioned(
-                                  right: 6,
-                                  top: 3,
-                                  child: BigText(
-                                    text: Get.find<PopularProductController>()
-                                        .totalItems
-                                        .toString(),
-                                    size: 12,
-                                    color: const Color(0xFF756d54),
-                                  ),
-                                )
-                                    : Container()
+                                if (Get.find<PopularProductController>()
+                                            .totalItems >=
+                                        1 &&
+                                    Get.find<PopularProductController>()
+                                            .totalItems <
+                                        10)
+                                  Positioned(
+                                    right: 6,
+                                    top: 3,
+                                    child: BigText(
+                                      text: Get.find<PopularProductController>()
+                                          .totalItems
+                                          .toString(),
+                                      size: 12,
+                                      color: const Color(0xFF756d54),
+                                    ),
+                                  )
+                                else if (Get.find<PopularProductController>()
+                                        .totalItems >=
+                                    10)
+                                  Positioned(
+                                    right: 3,
+                                    top: 3,
+                                    child: BigText(
+                                      text: Get.find<PopularProductController>()
+                                          .totalItems
+                                          .toString(),
+                                      size: 12,
+                                      color: const Color(0xFF756d54),
+                                    ),
+                                  )
+                                else
+                                  Container()
                               ],
                             ),
                           );
