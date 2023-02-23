@@ -30,8 +30,8 @@ class PopularProductController extends GetxController {
 
   int get quantity => _quantity;
   int _inCartItems = 0;
-
   int get inCartItems => _inCartItems + _quantity;
+
 
   // get product list from the server
   Future<void> getPopularProductList(bool reload) async {
@@ -64,31 +64,20 @@ class PopularProductController extends GetxController {
   }
 
   int checkQuantity(int quantity) {
-    if ((_inCartItems + quantity) < 0) {
+    if ((_inCartItems+quantity) < 0) {
       // Get.snakbar untuk manampilkan notification message
-      Get.snackbar(
-        "Item Count!",
-        "You can't reduce more.",
-        icon: const Icon(Icons.warning, color: Colors.white),
-        backgroundColor: Colors.orangeAccent,
-        colorText: Colors.white,
-      );
-      if (_inCartItems > 0) {
+      Get.snackbar("Item Count", "You can't reduce more!",
+          backgroundColor: AppColors.mainColor,
+          colorText: Colors.white);
+      if(_inCartItems>0){
         _quantity = -_inCartItems;
         return _quantity;
       }
       return 0;
-    } else if ((_inCartItems + quantity) > 20) {
-      Get.snackbar(
-        "Item Count!",
-        "You can't add more than 20.",
-        icon: const Icon(Icons.warning, color: Colors.white),
-        backgroundColor: Colors.orangeAccent,
-        colorText: Colors.white,
-      );
-      if (_inCartItems > 0) {
-        return 0;
-      }
+    } else if ((_inCartItems+quantity) > 20) {
+      Get.snackbar("Item Count", "You can't add more!",
+          backgroundColor: AppColors.mainColor,
+          colorText: Colors.white);
       return 20;
     } else {
       return quantity;
@@ -102,43 +91,41 @@ class PopularProductController extends GetxController {
     _cart = cart;
 
     // to know if there is an item in cart
-    var exist = false;
+    var exist=false;
     exist = _cart.existInCart(product);
 
     // if exist
     // get from storage _inCartItems=3
 
     // print("exist or not: " + exist.toString());
-    if (exist) {
-      _inCartItems = _cart.getQuantity(product);
+    if(exist) {
+      _inCartItems=_cart.getQuantity(product);
     }
     // print("the quantity in the cart: "+_inCartItems.toString() );
   }
 
   void addItem(ProductModel product) {
-    // add quantity
-    _cart.addItem(product, _quantity);
+      // add quantity
+      _cart.addItem(product, _quantity);
 
-    _quantity = 0;
-    _inCartItems = _cart.getQuantity(product);
+      _quantity=0;
+      _inCartItems=_cart.getQuantity(product);
 
-    _cart.items.forEach((key, value) {
-      print("the id is: " +
-          value.id.toString() +
-          " the quantity: " +
-          value.quantity.toString());
-    });
+      _cart.items.forEach((key, value) {
+        print("the id is: " + value.id.toString()+" the quantity: "+ value.quantity.toString());
+      });
 
-    // once update in crontroller, but ui doesnt udpated, must be use this function
-    update();
+      // once update in crontroller, but ui doesnt udpated, must be use this function
+      update();
   }
 
   int get totalItems {
     return _cart.totalItems;
   }
 
+
 //=================REUSABLE
-  List<CartModel> get getItems {
+  List<CartModel> get getItems{
     return _cart.getItems;
   }
 }

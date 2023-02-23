@@ -139,7 +139,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                     ],
                   ),
                 ),
-
+                
                 Padding(
                   padding: EdgeInsets.only(left: Dimensions.width20, top: Dimensions.height20),
                   child: SizedBox(
@@ -184,7 +184,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                           );
                         })),
                 ),
-
+                
                 SizedBox(height: Dimensions.height20,),
                 Padding(
                   padding: EdgeInsets.only(left: Dimensions.width20),
@@ -251,14 +251,11 @@ class _AddAddressPageState extends State<AddAddressPage> {
                       locationController.addAddress(_addressModel).then((response) {
                         if(response.isSuccess) {
                           Get.toNamed(RouteHelper.getInitial());
-                          Get.snackbar("Congratulations!",
-                            "Your address has been added successfully.",
-                            icon: const Icon(Icons.add_location, color: Colors.black),
-                          );
+                          Get.snackbar("Address", "Added Successfully");
                         } else {
-                          Get.snackbar("Sorry, we were unable to add your address", "Please check your information and try again.",
-                              icon: const Icon(Icons.wrong_location, color: Colors.black));
-                      }
+                          Get.snackbar("Address", "Couldn't save address");
+
+                        }
                       });
                     },
                     child: Container(
