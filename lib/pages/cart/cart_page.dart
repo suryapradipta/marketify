@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:marketify/controllers/auth_controller.dart';
 import 'package:marketify/controllers/popular_product_controller.dart';
@@ -155,11 +156,23 @@ class CartPage extends StatelessWidget {
                                                 .indexOf(
                                                     _cartList[index].product!);
                                             if (recommendedIndex < 0) {
-                                              Get.snackbar("History Product",
-                                                  "Product review is not available for history products!",
-                                                  backgroundColor:
-                                                      AppColors.mainColor,
-                                                  colorText: Colors.white);
+                                              // Get.snackbar("History Product",
+                                              //     "Product review is not available for history products!",
+                                              //     backgroundColor:
+                                              //         AppColors.mainColor,
+                                              //     colorText: Colors.white);
+
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                content: AwesomeSnackbarContent(
+                                                  title: 'Oops!',
+                                                  message:
+                                                  'Product review is not available for this item.',
+                                                  contentType: ContentType.warning,
+                                                ),
+                                                elevation: 0,
+                                                behavior: SnackBarBehavior.floating,
+                                                backgroundColor: Colors.transparent,
+                                              ));
                                             } else {
                                               Get.toNamed(RouteHelper
                                                   .getRecommendedFood(
