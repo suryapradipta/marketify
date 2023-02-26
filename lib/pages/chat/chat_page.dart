@@ -56,7 +56,7 @@ class _ChatPageState extends State<ChatPage> {
 
     _subscription = chatGPT!
         .build(
-            token: "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",
+            token: "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",
             baseOption: HttpSetup(receiveTimeout: 6000),
             isLogger: true)
         .onCompleteStream(request: request)
@@ -68,8 +68,11 @@ class _ChatPageState extends State<ChatPage> {
         _isTyping = false;
         _messages.insert(0, botMessage);
       });
+    })..onError((err) {
+      print("$err");
     });
   }
+
 
   Widget _buildTextComposer() {
     return Row(
